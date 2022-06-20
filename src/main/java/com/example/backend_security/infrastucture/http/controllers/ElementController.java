@@ -15,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.example.backend_security.domain.entities.Element;
-import com.example.backend_security.domain.entities.ElementImage;
 import com.example.backend_security.domain.usecases.elements.GetAllElements;
 import com.example.backend_security.infrastucture.database.entities.JpaElement;
 import com.example.backend_security.infrastucture.database.entities.JpaElementImage;
@@ -47,8 +46,6 @@ public class ElementController {
      * private CreateElement createElement;
      */
 
-
-
     @GetMapping("/get-all")
     public ResponseEntity<?> getAll() {
         HttpStatus status = HttpStatus.OK;
@@ -57,14 +54,13 @@ public class ElementController {
         List<Element> elementsDomain = new ArrayList<>();
         List<JpaElement> elementsJpa = jpaElementQueries.findAll();
 
-            elementsDomain = getAllElements.get();
-            System.out.println(elementsJpa.toString());
-            System.out.println(elementsDomain.toString());
+        elementsDomain = getAllElements.get();
+        System.out.println(elementsJpa.toString());
+        System.out.println(elementsDomain.toString());
 
         toReturn = new ResponseEntity<>(elementsJpa, status);
         return toReturn;
     }
-
 
     @GetMapping("/create")
     public String createMock(@RequestParam(value = "name", defaultValue = "World") String name) {

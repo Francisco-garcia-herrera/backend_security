@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.example.backend_security.domain.entities.Element;
 import com.example.backend_security.domain.repositories.ElementRepository;
-import com.example.backend_security.infrastucture.adapter.DomainToJpaAdapter;
 import com.example.backend_security.infrastucture.adapter.JpaToDomainAdapter;
 import com.example.backend_security.infrastucture.database.entities.JpaElement;
 import com.example.backend_security.infrastucture.database.queries.JpaElementQueries;
