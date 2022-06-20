@@ -33,6 +33,11 @@ public class JpaElementImage extends JpaElement {
         this.url = url;
     }
 
+    public JpaElementImage(Long id, Integer position, String url) {
+        super(id, position);
+        this.url = url;
+    }
+
     public Element mapToDomain(JpaElement jpaElement) {
         Element element = new ElementImage(jpaElement.getId(), this.getPosition(), this.url);
         return element;

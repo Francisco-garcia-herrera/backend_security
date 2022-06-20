@@ -15,12 +15,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.example.backend_security.domain.entities.Element;
+import com.example.backend_security.domain.entities.ElementImage;
 import com.example.backend_security.domain.usecases.elements.GetAllElements;
 import com.example.backend_security.infrastucture.database.entities.JpaElement;
 import com.example.backend_security.infrastucture.database.entities.JpaElementImage;
 import com.example.backend_security.infrastucture.database.entities.JpaElementVideo;
 import com.example.backend_security.infrastucture.database.queries.JpaElementQueries;
 import com.example.backend_security.infrastucture.http.httprestentities.ElementHttpRestEntity;
+import com.example.backend_security.infrastucture.http.httprestentities.ElementImageHttpRestEntity;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -45,37 +47,24 @@ public class ElementController {
      * private CreateElement createElement;
      */
 
+
+
     @GetMapping("/get-all")
     public ResponseEntity<?> getAll() {
-        List<ElementHttpRestEntity> body = new ArrayList<>();
         HttpStatus status = HttpStatus.OK;
         ResponseEntity<?> toReturn;
-        List<Element> elements = new ArrayList<>();
-        List<Element> element2 = new ArrayList<>();
-        try {
-            /* Long userId = this.getAuthUserId(); */
+        ElementHttpRestEntity elementHttpRestEntity = new ElementImageHttpRestEntity(1L, 1, "url");
+        List<Element> elementsDomain = new ArrayList<>();
+        List<JpaElement> elementsJpa = jpaElementQueries.findAll();
 
-            elements = getAllElements.get();
-            System.out.println(elements.toString());
+            elementsDomain = getAllElements.get();
+            System.out.println(elementsJpa.toString());
+            System.out.println(elementsDomain.toString());
 
-            /*
-             * if (elements != null) {
-             * for (Element element : elements) {
-             * body.add(element.fromEntity(element));
-             * }
-             * }
-             */
-
-        } catch (Exception e) {
-            status = HttpStatus.FORBIDDEN;
-            logger.error("Generic uncontrolled ERROR GET ALL", e);
-            // return new ResponseEntity<>(e.getMessage(), status);
-        } finally {
-            toReturn = new ResponseEntity<>(elements, status);
-            logger.debug(". Status<" + status + ">");
-        }
+        toReturn = new ResponseEntity<>(elementsJpa, status);
         return toReturn;
     }
+
 
     @GetMapping("/create")
     public String createMock(@RequestParam(value = "name", defaultValue = "World") String name) {
