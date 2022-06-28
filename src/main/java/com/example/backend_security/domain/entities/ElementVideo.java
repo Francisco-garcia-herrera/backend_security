@@ -3,6 +3,9 @@ package com.example.backend_security.domain.entities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.example.backend_security.infrastucture.http.httprestentities.ElementHttpRestEntity;
+import com.example.backend_security.infrastucture.http.httprestentities.ElementVideoHttpRestEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +18,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ElementVideo extends Element {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private String codec;
 
     public ElementVideo(Integer position, String codec) {
@@ -30,5 +32,11 @@ public class ElementVideo extends Element {
 
     public String render() {
         return "Elemento Video: " + this.getPosition() + ". Url: " + this.codec;
+    }
+
+    public ElementHttpRestEntity mapToDto(Element element) {
+        ElementHttpRestEntity elementHttpRestEntity = new ElementVideoHttpRestEntity(element.getId(),
+                this.getPosition(), this.codec);
+        return elementHttpRestEntity;
     }
 }

@@ -15,7 +15,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ElementImageHttpRestEntity extends ElementHttpRestEntity {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private String url;
 
     public ElementImageHttpRestEntity(Long id, Integer position, String url) {

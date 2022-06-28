@@ -15,7 +15,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ElementVideoHttpRestEntity extends ElementHttpRestEntity {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private String codec;
     private Object url;
 

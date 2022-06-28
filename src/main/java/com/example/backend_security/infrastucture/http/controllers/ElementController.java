@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.example.backend_security.domain.entities.Element;
 import com.example.backend_security.domain.usecases.elements.GetAllElements;
+import com.example.backend_security.infrastucture.adapter.DomainToDtoAdapter;
 import com.example.backend_security.infrastucture.database.entities.JpaElement;
 import com.example.backend_security.infrastucture.database.entities.JpaElementImage;
 import com.example.backend_security.infrastucture.database.entities.JpaElementVideo;
@@ -33,13 +33,10 @@ import org.springframework.http.ResponseEntity;
         MediaType.ALL_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ElementController {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Autowired
     private GetAllElements getAllElements;
-
     @Autowired
-    JpaElementQueries jpaElementQueries;
+    private DomainToDtoAdapter domainToDtoAdapter;
 
     /*
      * @Autowired
@@ -48,22 +45,20 @@ public class ElementController {
 
     @GetMapping("/get-all")
     public ResponseEntity<?> getAll() {
+        List<ElementHttpRestEntity> body = new ArrayList<>();
         HttpStatus status = HttpStatus.OK;
         ResponseEntity<?> toReturn;
-        ElementHttpRestEntity elementHttpRestEntity = new ElementImageHttpRestEntity(1L, 1, "url");
         List<Element> elementsDomain = new ArrayList<>();
-        List<JpaElement> elementsJpa = jpaElementQueries.findAll();
 
         elementsDomain = getAllElements.get();
-        System.out.println(elementsJpa.toString());
-        System.out.println(elementsDomain.toString());
+        body = domainToDtoAdapter.convert(elementsDomain);
 
-        toReturn = new ResponseEntity<>(elementsJpa, status);
+        toReturn = new ResponseEntity<>(body, status);
         return toReturn;
     }
 
     @GetMapping("/create")
-    public String createMock(@RequestParam(value = "name", defaultValue = "World") String name) {
+    public String createMock() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth.getPrincipal());
         System.out.println(auth.getAuthorities());
