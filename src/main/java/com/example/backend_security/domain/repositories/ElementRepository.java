@@ -8,4 +8,8 @@ public interface ElementRepository {
 
     List<Element> getAll();
 
+    Element save(Element element);
+
+    void delete(Element element);
+
 }

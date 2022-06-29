@@ -13,6 +13,6 @@ public class DomainToJpaAdapter {
 
     public JpaElement convert(Element object) {
         logger.info("Conver Element to JpaElement");
-        return null;
+        return object.mapToJpa(object);
     }
 }

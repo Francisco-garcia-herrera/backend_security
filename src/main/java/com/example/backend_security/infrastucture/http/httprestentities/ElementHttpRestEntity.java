@@ -9,7 +9,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class ElementHttpRestEntity {
+public abstract class ElementHttpRestEntity implements ElementInterfaceHttpRestEntity {
     private Long id;
     private Integer position;
+
+    public ElementHttpRestEntity(Integer position) {
+        this.position = position;
+    }
 }

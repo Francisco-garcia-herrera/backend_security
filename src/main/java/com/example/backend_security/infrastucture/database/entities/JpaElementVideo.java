@@ -26,20 +26,31 @@ import lombok.Setter;
 @AllArgsConstructor
 @PrimaryKeyJoinColumn(name = "element_id")
 public class JpaElementVideo extends JpaElement {
+
+    private String type;
+
     private String codec;
 
-    public JpaElementVideo(Integer position, String codec) {
+    public JpaElementVideo(Integer position, String type, String codec) {
         super(position);
+        this.type = type;
         this.codec = codec;
+
     }
 
-    public JpaElementVideo(Long id, Integer position, String codec) {
+    public JpaElementVideo(Long id, Integer position, String type, String codec) {
         super(id, position);
+        this.type = type;
         this.codec = codec;
     }
 
     public Element mapToDomain(JpaElement jpaElement) {
-        Element element = new ElementVideo(jpaElement.getId(), this.getPosition(), this.codec);
+        Element element = new ElementVideo(jpaElement.getId(), jpaElement.getPosition(), this.type, this.codec);
         return element;
+    }
+
+    public JpaElement mapToJpa(Element element) {
+        JpaElement jpaElement = new JpaElementVideo(this.getId(), this.getPosition(), this.type, this.codec);
+        return jpaElement;
     }
 }

@@ -9,15 +9,16 @@ import com.example.backend_security.domain.entities.Element;
 import com.example.backend_security.domain.repositories.ElementRepository;
 
 @Service
-public class CreateElement {
+public class DeleteElement {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     ElementRepository elementRepository;
 
-    public Element create(Element elementToCreate) {
-        logger.info("Create Element Usecase");
-        return elementRepository.save(elementToCreate);
+    public String delete(Element elementToDelete) {
+        logger.info("Delete Element Usecase");
+        elementRepository.delete(elementToDelete);
+        return "Element Delete Successfully";
     }
 
 }

@@ -26,20 +26,25 @@ import lombok.Setter;
 @AllArgsConstructor
 @PrimaryKeyJoinColumn(name = "element_id")
 public class JpaElementImage extends JpaElement {
+
+    private String type;
+
     private String url;
 
-    public JpaElementImage(Integer position, String url) {
+    public JpaElementImage(Integer position, String type, String url) {
         super(position);
+        this.type = type;
         this.url = url;
     }
 
-    public JpaElementImage(Long id, Integer position, String url) {
+    public JpaElementImage(Long id, Integer position, String type, String url) {
         super(id, position);
+        this.type = type;
         this.url = url;
     }
 
     public Element mapToDomain(JpaElement jpaElement) {
-        Element element = new ElementImage(jpaElement.getId(), this.getPosition(), this.url);
+        Element element = new ElementImage(jpaElement.getId(), this.getPosition(), this.type, this.url);
         return element;
     }
 

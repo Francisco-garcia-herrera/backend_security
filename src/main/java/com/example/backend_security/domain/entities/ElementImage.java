@@ -1,8 +1,7 @@
 package com.example.backend_security.domain.entities;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.example.backend_security.infrastucture.database.entities.JpaElement;
+import com.example.backend_security.infrastucture.database.entities.JpaElementImage;
 import com.example.backend_security.infrastucture.http.httprestentities.ElementHttpRestEntity;
 import com.example.backend_security.infrastucture.http.httprestentities.ElementImageHttpRestEntity;
 
@@ -18,15 +17,19 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ElementImage extends Element {
+
+    private String type;
     private String url;
 
-    public ElementImage(Integer position, String url) {
+    public ElementImage(Integer position, String type, String url) {
         super(position);
+        this.type = type;
         this.url = url;
     }
 
-    public ElementImage(Long id, Integer position, String url) {
+    public ElementImage(Long id, Integer position, String type, String url) {
         super(id, position);
+        this.type = type;
         this.url = url;
     }
 
@@ -36,7 +39,12 @@ public class ElementImage extends Element {
 
     public ElementHttpRestEntity mapToDto(Element element) {
         ElementHttpRestEntity elementHttpRestEntity = new ElementImageHttpRestEntity(element.getId(),
-                this.getPosition(), this.url);
+                this.getPosition(), this.type, this.url);
         return elementHttpRestEntity;
+    }
+
+    public JpaElement mapToJpa(Element element) {
+        JpaElement jpaElement = new JpaElementImage(this.getId(), this.getPosition(), this.type, this.url);
+        return jpaElement;
     }
 }

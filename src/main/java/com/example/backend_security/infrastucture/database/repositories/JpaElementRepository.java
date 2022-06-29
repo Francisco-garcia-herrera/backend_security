@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.backend_security.domain.entities.Element;
 import com.example.backend_security.domain.repositories.ElementRepository;
+import com.example.backend_security.infrastucture.adapter.DomainToJpaAdapter;
 import com.example.backend_security.infrastucture.adapter.JpaToDomainAdapter;
 import com.example.backend_security.infrastucture.database.entities.JpaElement;
 import com.example.backend_security.infrastucture.database.queries.JpaElementQueries;
@@ -21,6 +22,9 @@ public class JpaElementRepository implements ElementRepository {
     @Autowired
     JpaToDomainAdapter jpaToDomainAdapter;
 
+    @Autowired
+    DomainToJpaAdapter domainToJpaAdapter;
+
     @Override
     public List<Element> getAll() {
         List<JpaElement> jpaElements = new ArrayList<>();
@@ -28,9 +32,34 @@ public class JpaElementRepository implements ElementRepository {
             jpaElements = jpaElementQueries.findAll();
         } catch (Exception e) {
             /* throw new Exception(); */
-            System.out.println("Exception GetAll " + e);
+            System.out.println("Exception GetAll JpaElementRepository " + e);
         }
         return jpaToDomainAdapter.convert(jpaElements);
+    }
+
+    @Override
+    public Element save(Element element) {
+        JpaElement saved = null;
+        try {
+            JpaElement jpaElement = domainToJpaAdapter.convert(element);
+            saved = this.jpaElementQueries.save(jpaElement);
+        } catch (Exception e) {
+            System.out.println("Exception save JpaElementRepository " + e);
+        }
+        return jpaToDomainAdapter.convert(saved);
+    }
+
+    @Override
+    public void delete(Element element) {
+        if (element == null)
+            return;
+        try {
+            JpaElement jpaElement = domainToJpaAdapter.convert(element);
+            this.jpaElementQueries.deleteById(jpaElement.getId());
+        } catch (Exception e) {
+            /* throw new T2cDataBaseException("Error deleting md ict element, " + e); */
+            System.out.println("Exception delete JpaElementRepository " + e);
+        }
     }
 
 }

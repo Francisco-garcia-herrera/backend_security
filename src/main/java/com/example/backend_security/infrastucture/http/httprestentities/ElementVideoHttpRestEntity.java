@@ -1,7 +1,7 @@
 package com.example.backend_security.infrastucture.http.httprestentities;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.example.backend_security.domain.entities.Element;
+import com.example.backend_security.domain.entities.ElementVideo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,12 +15,21 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ElementVideoHttpRestEntity extends ElementHttpRestEntity {
-    private String codec;
-    private Object url;
 
-    public ElementVideoHttpRestEntity(Long id, Integer position, String codec) {
+    private String type;
+
+    private String codec;
+
+    public ElementVideoHttpRestEntity(Long id, Integer position, String type, String codec) {
         super(id, position);
+        this.type = type;
         this.codec = codec;
+    }
+
+    public Element mapToDomain(ElementHttpRestEntity elementHttpRestEntity) {
+        Element element = new ElementVideo(elementHttpRestEntity.getId(), elementHttpRestEntity.getPosition(),
+                this.type, this.codec);
+        return element;
     }
 
 }

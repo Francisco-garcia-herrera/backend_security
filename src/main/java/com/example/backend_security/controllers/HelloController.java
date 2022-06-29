@@ -40,8 +40,8 @@ public class HelloController {
         System.out.println(auth.isAuthenticated());
 
         List<String> elements = new ArrayList<>();
-        Element element = new ElementImage(1, "URL IMAGE");
-        Element element2 = new ElementVideo(1, "H264");
+        Element element = new ElementImage(1, "IMAGE", "URL IMAGE");
+        Element element2 = new ElementVideo(1, "VIDEO", "H264");
         elements.add(element.render());
         elements.add(element2.render());
 
@@ -75,10 +75,10 @@ public class HelloController {
         System.out.println(auth.isAuthenticated());
 
         List<JpaElement> elements = new ArrayList<>();
-        elements.add(new JpaElementImage(1, "URL IMAGE"));
-        elements.add(new JpaElementVideo(2, "H264"));
-        elements.add(new JpaElementImage(3, "URL IMAGE 2"));
-        elements.add(new JpaElementVideo(4, "H264 2"));
+        elements.add(new JpaElementImage(1, "IMAGE", "URL IMAGE"));
+        elements.add(new JpaElementVideo(2, "VIDEO", "H264"));
+        elements.add(new JpaElementImage(3, "IMAGE", "URL IMAGE 2"));
+        elements.add(new JpaElementVideo(4, "VIDEO", "H264 2"));
         for (JpaElement jpaElement : elements) {
             jpaElementQueries.saveAndFlush(jpaElement);
         }
