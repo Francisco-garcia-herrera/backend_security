@@ -20,6 +20,11 @@ public class ElementVideoHttpRestEntity extends ElementHttpRestEntity {
 
     private String codec;
 
+    @Override
+    public String getType(){
+        return this.type;
+    }
+
     public ElementVideoHttpRestEntity(Long id, Integer position, String type, String codec) {
         super(id, position);
         this.type = type;

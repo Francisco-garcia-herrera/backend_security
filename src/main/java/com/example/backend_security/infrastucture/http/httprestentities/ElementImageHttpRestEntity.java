@@ -20,6 +20,11 @@ public class ElementImageHttpRestEntity extends ElementHttpRestEntity {
 
     private String url;
 
+    @Override
+    public String getType(){
+        return this.type;
+    }
+
     public ElementImageHttpRestEntity(Integer position, String type, String url) {
         super(position);
         this.type = type;

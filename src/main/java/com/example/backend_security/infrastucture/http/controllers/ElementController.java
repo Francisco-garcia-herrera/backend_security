@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend_security.domain.entities.Element;
+import com.example.backend_security.domain.entities.ElementImage;
 import com.example.backend_security.domain.usecases.elements.CreateElement;
 import com.example.backend_security.domain.usecases.elements.DeleteElement;
 import com.example.backend_security.domain.usecases.elements.GetAllElements;
 import com.example.backend_security.infrastucture.adapter.DomainToDtoAdapter;
+import com.example.backend_security.infrastucture.adapter.TypeToDomainAdapter;
+import com.example.backend_security.infrastucture.database.queries.JpaElementQueries;
 import com.example.backend_security.infrastucture.http.httprestentities.ElementHttpRestEntity;
 import com.example.backend_security.infrastucture.http.httprestentities.ElementImageHttpRestEntity;
 
@@ -39,9 +42,13 @@ public class ElementController {
     @Autowired
     private DomainToDtoAdapter domainToDtoAdapter;
     @Autowired
+    private TypeToDomainAdapter typeToDomainAdapter;
+    @Autowired
     private CreateElement createElement;
     @Autowired
     private DeleteElement deleteElement;
+    @Autowired
+    private JpaElementQueries jpaElementQueries;
 
     @GetMapping("/get-all")
     public ResponseEntity<?> getAll() {
@@ -65,9 +72,10 @@ public class ElementController {
         ResponseEntity<?> toReturn;
         try {
             // Long userId = getAuthUserId();
-            Element element = data.mapToDomain(data);
-            createdElement = createElement.create(element);
-            body = domainToDtoAdapter.convert(createdElement);
+/*             Element element = data.mapToDomain(data); */
+            Element element = typeToDomainAdapter.convert(data);
+/*             createdElement = createElement.create(element); */
+            body = domainToDtoAdapter.convert(element);
 
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -81,19 +89,19 @@ public class ElementController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@RequestBody ElementImageHttpRestEntity elementImageHttpRestEntity) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        logger.info("dos");
         String body = "";
         HttpStatus status = HttpStatus.OK;
         ResponseEntity<?> toReturn;
         try {
-            Element element = elementImageHttpRestEntity.mapToDomain(elementImageHttpRestEntity);
-            body = deleteElement.delete(element);
+            body = deleteElement.delete(id);
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
             logger.error("Generic uncontrolled ERROR", e);
             return new ResponseEntity<>(e.getMessage(), status);
         } finally {
-            toReturn = new ResponseEntity<>(elementImageHttpRestEntity, status);
+            toReturn = new ResponseEntity<>("Succesfully deleted", status);
             logger.debug(". Status<" + status + ">");
         }
         return toReturn;

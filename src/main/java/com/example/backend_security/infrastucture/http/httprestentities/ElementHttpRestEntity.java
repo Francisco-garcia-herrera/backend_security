@@ -16,4 +16,8 @@ public abstract class ElementHttpRestEntity implements ElementInterfaceHttpRestE
     public ElementHttpRestEntity(Integer position) {
         this.position = position;
     }
+
+    public String getType(){
+        return "";
+    }
 }

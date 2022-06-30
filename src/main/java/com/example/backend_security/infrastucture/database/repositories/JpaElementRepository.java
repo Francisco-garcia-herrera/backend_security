@@ -50,12 +50,11 @@ public class JpaElementRepository implements ElementRepository {
     }
 
     @Override
-    public void delete(Element element) {
-        if (element == null)
+    public void delete(Long id) {
+        if (id == null)
             return;
         try {
-            JpaElement jpaElement = domainToJpaAdapter.convert(element);
-            this.jpaElementQueries.deleteById(jpaElement.getId());
+            this.jpaElementQueries.deleteById(id);
         } catch (Exception e) {
             /* throw new T2cDataBaseException("Error deleting md ict element, " + e); */
             System.out.println("Exception delete JpaElementRepository " + e);

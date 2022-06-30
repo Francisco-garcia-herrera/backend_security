@@ -10,6 +10,6 @@ public interface ElementRepository {
 
     Element save(Element element);
 
-    void delete(Element element);
+    void delete(Long id);
 
 }

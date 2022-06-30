@@ -15,9 +15,9 @@ public class DeleteElement {
     @Autowired
     ElementRepository elementRepository;
 
-    public String delete(Element elementToDelete) {
+    public String delete(Long id) {
         logger.info("Delete Element Usecase");
-        elementRepository.delete(elementToDelete);
+        elementRepository.delete(id);
         return "Element Delete Successfully";
     }
 
