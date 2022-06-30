@@ -61,4 +61,19 @@ public class JpaElementRepository implements ElementRepository {
         }
     }
 
+    @Override
+    public Element update(Element element) {
+        if (element == null)
+            return null;
+        JpaElement saved = null;
+        try {
+            JpaElement jpaElement = domainToJpaAdapter.convert(element);
+            saved = this.jpaElementQueries.saveAndFlush(jpaElement);
+        } catch (Exception e) {
+            /* throw new T2cDataBaseException("Error deleting md ict element, " + e); */
+            System.out.println("Exception update JpaElementRepository " + e);
+        }
+        return jpaToDomainAdapter.convert(saved);
+    }
+
 }

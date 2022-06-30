@@ -9,9 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.example.backend_security.domain.entities.Element;
+import com.example.backend_security.domain.entities.Page;
 import com.example.backend_security.domain.entities.Role;
 import com.example.backend_security.domain.entities.User;
 import com.example.backend_security.infrastucture.database.entities.JpaElement;
+import com.example.backend_security.infrastucture.database.entities.JpaPage;
 import com.example.backend_security.infrastucture.database.entities.JpaRole;
 import com.example.backend_security.infrastucture.database.entities.JpaUser;
 
@@ -53,8 +55,23 @@ public class JpaToDomainAdapter {
     }
 
     public Element convert(JpaElement object) {
-        logger.info("Conver JpaElement to Domain Element");
+        logger.info("Conver JpaElement to DomainElement");
         return object.mapToDomain(object);
+    }
+
+    public Page convert(JpaPage object) {
+        logger.info("Conver JpaPage to DomainPage");
+        return Page.builder()
+                .id(object.getId())
+                .name(object.getName())
+                /* .elements(convert(object.getElements())) */
+                .build();
+    }
+
+    public List<Page> convertPages(List<JpaPage> objects) {
+        if (objects == null)
+            return null;
+        return objects.stream().map(this::convert).collect(Collectors.toList());
     }
 
 }

@@ -12,4 +12,6 @@ public interface ElementRepository {
 
     void delete(Long id);
 
+    Element update(Element element);
+
 }

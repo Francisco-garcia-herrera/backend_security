@@ -17,7 +17,7 @@ public class WebSecurityConfig {
                 .csrf().disable()
                 .httpBasic(withDefaults())
                 .authorizeRequests()
-                .antMatchers("/hello/**", "/elements/**").permitAll()
+                .antMatchers("/hello/**", "/elements/**", "/pages/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
         return http.build();
