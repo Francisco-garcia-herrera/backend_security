@@ -41,7 +41,7 @@ public class PageController {
         List<Page> pagesDomain = new ArrayList<>();
 
         pagesDomain = getAllPages.get();
-        body = domainToDtoAdapter.convertPage(pagesDomain);
+        body = domainToDtoAdapter.convertPages(pagesDomain);
 
         toReturn = new ResponseEntity<>(body, status);
         return toReturn;

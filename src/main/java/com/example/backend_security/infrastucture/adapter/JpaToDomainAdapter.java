@@ -64,7 +64,7 @@ public class JpaToDomainAdapter {
         return Page.builder()
                 .id(object.getId())
                 .name(object.getName())
-                /* .elements(convert(object.getElements())) */
+                .elements(convert(object.getElements()))
                 .build();
     }
 

@@ -16,18 +16,18 @@ import com.example.backend_security.infrastucture.http.httprestentities.PageHttp
 public class DomainToDtoAdapter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public ElementHttpRestEntity convert(Element object) {
-        logger.info("Conver Element to Element HttpRest");
+    public static ElementHttpRestEntity convert(Element object) {
+/*         logger.info("Conver Element to Element HttpRest"); */
         return object.mapToDto(object);
     }
 
-    public List<ElementHttpRestEntity> convert(List<Element> objects) {
+    public static List<ElementHttpRestEntity> convert(List<Element> objects) {
         if (objects == null)
             return null;
-        return objects.stream().map(this::convert).collect(Collectors.toList());
+        return objects.stream().map(DomainToDtoAdapter::convert).collect(Collectors.toList());
     }
 
-    public List<PageHttpRestEntity> convertPage(List<Page> objects) {
+    public List<PageHttpRestEntity> convertPages(List<Page> objects) {
         if (objects == null)
             return null;
         return objects.stream().map(this::convertPage).collect(Collectors.toList());
