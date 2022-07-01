@@ -24,7 +24,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class JpaElement implements JpaElementInterface {
     @Id
@@ -37,13 +36,15 @@ public abstract class JpaElement implements JpaElementInterface {
     @JoinColumn(name = "page_id")
     private JpaPage page;
 
-    public JpaElement(Integer position) {
+    public JpaElement(Integer position, JpaPage jpaPage) {
         this.position = position;
+        this.page = jpaPage;
     }
 
-    public JpaElement(Long id, Integer position) {
+    public JpaElement(Long id, Integer position, JpaPage jpaPage) {
         this.id = id;
         this.position = position;
+        this.page = jpaPage;
     }
 
 }

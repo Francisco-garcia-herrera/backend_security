@@ -31,15 +31,15 @@ public class JpaElementVideo extends JpaElement {
 
     private String codec;
 
-    public JpaElementVideo(Integer position, String type, String codec) {
-        super(position);
+    public JpaElementVideo(Integer position, JpaPage jpaPage, String type, String codec) {
+        super(position,jpaPage);
         this.type = type;
         this.codec = codec;
 
     }
 
-    public JpaElementVideo(Long id, Integer position, String type, String codec) {
-        super(id, position);
+    public JpaElementVideo(Long id, Integer position, JpaPage jpaPage, String type, String codec) {
+        super(id, position,jpaPage);
         this.type = type;
         this.codec = codec;
     }
