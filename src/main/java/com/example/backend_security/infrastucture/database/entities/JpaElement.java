@@ -36,15 +36,13 @@ public abstract class JpaElement implements JpaElementInterface {
     @JoinColumn(name = "page_id")
     private JpaPage page;
 
-    public JpaElement(Integer position, JpaPage jpaPage) {
+    public JpaElement(Integer position) {
         this.position = position;
-        this.page = jpaPage;
     }
 
-    public JpaElement(Long id, Integer position, JpaPage jpaPage) {
+    public JpaElement(Long id, Integer position) {
         this.id = id;
         this.position = position;
-        this.page = jpaPage;
     }
 
 }
