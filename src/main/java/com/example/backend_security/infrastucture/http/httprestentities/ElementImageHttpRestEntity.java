@@ -21,24 +21,25 @@ public class ElementImageHttpRestEntity extends ElementHttpRestEntity {
     private String url;
 
     @Override
-    public String getType(){
+    public String getType() {
         return this.type;
     }
 
-    public ElementImageHttpRestEntity(Integer position, String type, String url) {
-        super(position);
+    public ElementImageHttpRestEntity(Integer position, PageHttpRestEntity page, String type, String url) {
+        super(position, page);
         this.type = type;
         this.url = url;
     }
 
-    public ElementImageHttpRestEntity(Long id, Integer position, String type, String url) {
-        super(id, position);
+    public ElementImageHttpRestEntity(Long id, Integer position, PageHttpRestEntity page, String type, String url) {
+        super(id, position, page);
         this.type = type;
         this.url = url;
     }
 
     public Element mapToDomain(ElementHttpRestEntity elementHttpRestEntity) {
         Element element = new ElementImage(elementHttpRestEntity.getId(), elementHttpRestEntity.getPosition(),
+                elementHttpRestEntity.getPage().maptoDomain(elementHttpRestEntity.getPage()),
                 this.type, this.url);
         return element;
     }

@@ -17,7 +17,7 @@ public class DomainToDtoAdapter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public static ElementHttpRestEntity convert(Element object) {
-/*         logger.info("Conver Element to Element HttpRest"); */
+        /* logger.info("Conver Element to Element HttpRest"); */
         return object.mapToDto(object);
     }
 
@@ -37,5 +37,17 @@ public class DomainToDtoAdapter {
         if (object == null)
             return null;
         return object.mapToDto(object);
+    }
+
+    public List<PageHttpRestEntity> convertPagesReduced(List<Page> objects) {
+        if (objects == null)
+            return null;
+        return objects.stream().map(this::convertPageReduced).collect(Collectors.toList());
+    }
+
+    public PageHttpRestEntity convertPageReduced(Page object) {
+        if (object == null)
+            return null;
+        return object.mapToDtoReduced(object);
     }
 }

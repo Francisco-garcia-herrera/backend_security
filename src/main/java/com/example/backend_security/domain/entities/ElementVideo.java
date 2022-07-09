@@ -28,8 +28,8 @@ public class ElementVideo extends Element {
         this.codec = codec;
     }
 
-    public ElementVideo(Long id, Integer position, String type, String codec) {
-        super(id, position);
+    public ElementVideo(Long id, Integer position, Page page, String type, String codec) {
+        super(id, position, page);
         this.type = type;
         this.codec = codec;
     }
@@ -40,7 +40,7 @@ public class ElementVideo extends Element {
 
     public ElementHttpRestEntity mapToDto(Element element) {
         ElementHttpRestEntity elementHttpRestEntity = new ElementVideoHttpRestEntity(element.getId(),
-                this.getPosition(), this.type, this.codec);
+                this.getPosition(), this.getPage().mapToDto(this.getPage()), this.type, this.codec);
         return elementHttpRestEntity;
     }
 

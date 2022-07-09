@@ -1,5 +1,6 @@
 package com.example.backend_security.infrastucture.database.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -14,6 +15,8 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.example.backend_security.domain.entities.Element;
+import com.example.backend_security.domain.entities.Page;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -42,5 +45,15 @@ public class JpaPage {
     @OneToMany(mappedBy = "page")
     @JsonIgnoreProperties("page")
     private List<JpaElement> elements;
+
+    public Page mapToDomain(JpaPage jpaPage) {
+        List<Element> elements = new ArrayList<>();
+        for (JpaElement jpaElement : jpaPage.getElements()) {
+            Element element = jpaElement.mapToDomainReduced(jpaElement);
+            elements.add(element);
+        }
+        Page page = new Page(jpaPage.getId(), jpaPage.getName(), elements);
+        return page;
+    }
 
 }

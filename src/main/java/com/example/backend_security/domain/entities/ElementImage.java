@@ -27,8 +27,8 @@ public class ElementImage extends Element {
         this.url = url;
     }
 
-    public ElementImage(Long id, Integer position, String type, String url) {
-        super(id, position);
+    public ElementImage(Long id, Integer position, Page page, String type, String url) {
+        super(id, position, page);
         this.type = type;
         this.url = url;
     }
@@ -39,7 +39,7 @@ public class ElementImage extends Element {
 
     public ElementHttpRestEntity mapToDto(Element element) {
         ElementHttpRestEntity elementHttpRestEntity = new ElementImageHttpRestEntity(element.getId(),
-                this.getPosition(), this.type, this.url);
+                this.getPosition(), this.getPage().mapToDto(this.getPage()), this.type, this.url);
         return elementHttpRestEntity;
     }
 

@@ -9,6 +9,7 @@ import com.example.backend_security.infrastucture.database.queries.JpaPageQuerie
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,6 +36,22 @@ public class JpaPageRepository implements PageRepository {
             System.out.println("Exception GetAll JpaElementRepository " + e);
         }
         return jpaToDomainAdapter.convertPages(jpaPages);
+    }
+
+    @Override
+    public Page getPageById(Long pageId) {
+        Optional<JpaPage> jpaPageOptional = null;
+        Page page = new Page();
+        try {
+            jpaPageOptional = jpaPageQueries.findById(pageId);
+        } catch (Exception e) {
+            /* throw new Exception(); */
+            System.out.println("Exception GetAll JpaElementRepository " + e);
+        }
+        if (jpaPageOptional.isPresent()) {
+            page = jpaToDomainAdapter.convert(jpaPageOptional.get());
+        }
+        return page;
     }
 
 }

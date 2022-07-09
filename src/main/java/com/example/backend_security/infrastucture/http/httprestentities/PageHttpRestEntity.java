@@ -1,6 +1,10 @@
 package com.example.backend_security.infrastucture.http.httprestentities;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.example.backend_security.domain.entities.Element;
+import com.example.backend_security.domain.entities.Page;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,5 +23,18 @@ public class PageHttpRestEntity {
     private String name;
 
     private List<ElementHttpRestEntity> elements;
+
+    public Page maptoDomain(PageHttpRestEntity pageHttpRestEntity) {
+
+        List<Element> elements = new ArrayList<>();
+        for (ElementHttpRestEntity elementHttpRestEntity : pageHttpRestEntity.getElements()) {
+            Element element = elementHttpRestEntity.mapToDomain(elementHttpRestEntity);
+            elements.add(element);
+        }
+
+        Page page = new Page(pageHttpRestEntity.getId(), pageHttpRestEntity.getName(), elements);
+
+        return page;
+    }
 
 }

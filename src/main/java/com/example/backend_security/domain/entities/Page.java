@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.example.backend_security.infrastucture.adapter.DomainToDtoAdapter;
-import com.example.backend_security.infrastucture.http.httprestentities.ElementHttpRestEntity;
 import com.example.backend_security.infrastucture.http.httprestentities.PageHttpRestEntity;
 
 import lombok.AllArgsConstructor;
@@ -30,7 +29,16 @@ public class Page {
         return PageHttpRestEntity.builder()
                 .id(this.getId())
                 .name(this.getName())
-                .elements(page.getElements() != null ? page.getElements().stream().map(DomainToDtoAdapter::convert).collect(Collectors.toList()) : null)
+                .elements(page.getElements() != null
+                        ? page.getElements().stream().map(DomainToDtoAdapter::convert).collect(Collectors.toList())
+                        : null)
+                .build();
+    }
+
+    public PageHttpRestEntity mapToDtoReduced(Page page) {
+        return PageHttpRestEntity.builder()
+                .id(this.getId())
+                .name(this.getName())
                 .build();
     }
 

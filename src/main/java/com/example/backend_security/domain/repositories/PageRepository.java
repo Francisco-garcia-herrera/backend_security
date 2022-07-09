@@ -8,4 +8,5 @@ public interface PageRepository {
 
     List<Page> getAll();
 
+    Page getPageById(Long pageId);
 }

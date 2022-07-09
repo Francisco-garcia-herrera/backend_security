@@ -15,6 +15,8 @@ public abstract class Element implements ElementInterface {
 
     private Integer position;
 
+    private Page page;
+
     public Element(Integer position) {
         this.position = position;
     }

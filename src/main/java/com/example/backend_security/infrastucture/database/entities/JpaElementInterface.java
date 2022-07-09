@@ -4,4 +4,6 @@ import com.example.backend_security.domain.entities.Element;
 
 public interface JpaElementInterface {
     public Element mapToDomain(JpaElement jpaElement);
+
+    public Element mapToDomainReduced(JpaElement jpaElement);
 }

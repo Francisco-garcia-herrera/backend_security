@@ -8,12 +8,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend_security.domain.entities.Page;
 
 import com.example.backend_security.domain.usecases.pages.GetAllPages;
+import com.example.backend_security.domain.usecases.pages.GetPage;
 import com.example.backend_security.infrastucture.adapter.DomainToDtoAdapter;
 import com.example.backend_security.infrastucture.http.httprestentities.PageHttpRestEntity;
 
@@ -30,6 +32,10 @@ public class PageController {
 
     @Autowired
     private GetAllPages getAllPages;
+
+    @Autowired
+    private GetPage getPage;
+
     @Autowired
     private DomainToDtoAdapter domainToDtoAdapter;
 
@@ -41,7 +47,21 @@ public class PageController {
         List<Page> pagesDomain = new ArrayList<>();
 
         pagesDomain = getAllPages.get();
-        body = domainToDtoAdapter.convertPages(pagesDomain);
+        body = domainToDtoAdapter.convertPagesReduced(pagesDomain);
+
+        toReturn = new ResponseEntity<>(body, status);
+        return toReturn;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        PageHttpRestEntity body = new PageHttpRestEntity();
+        HttpStatus status = HttpStatus.OK;
+        ResponseEntity<?> toReturn;
+        Page pageDomain = new Page();
+
+        pageDomain = getPage.get(id);
+        body = domainToDtoAdapter.convertPage(pageDomain);
 
         toReturn = new ResponseEntity<>(body, status);
         return toReturn;

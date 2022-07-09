@@ -21,18 +21,19 @@ public class ElementVideoHttpRestEntity extends ElementHttpRestEntity {
     private String codec;
 
     @Override
-    public String getType(){
+    public String getType() {
         return this.type;
     }
 
-    public ElementVideoHttpRestEntity(Long id, Integer position, String type, String codec) {
-        super(id, position);
+    public ElementVideoHttpRestEntity(Long id, Integer position, PageHttpRestEntity page, String type, String codec) {
+        super(id, position, page);
         this.type = type;
         this.codec = codec;
     }
 
     public Element mapToDomain(ElementHttpRestEntity elementHttpRestEntity) {
         Element element = new ElementVideo(elementHttpRestEntity.getId(), elementHttpRestEntity.getPosition(),
+                elementHttpRestEntity.getPage().maptoDomain(elementHttpRestEntity.getPage()),
                 this.type, this.codec);
         return element;
     }

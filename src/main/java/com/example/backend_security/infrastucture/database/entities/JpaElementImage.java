@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.example.backend_security.domain.entities.Element;
 import com.example.backend_security.domain.entities.ElementImage;
+import com.example.backend_security.domain.entities.Page;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,7 +45,17 @@ public class JpaElementImage extends JpaElement {
     }
 
     public Element mapToDomain(JpaElement jpaElement) {
-        Element element = new ElementImage(jpaElement.getId(), this.getPosition(), this.type, this.url);
+        Element element = new ElementImage(jpaElement.getId(), this.getPosition(),
+                this.getPage().mapToDomain(this.getPage()), this.type, this.url);
+        return element;
+    }
+
+    public Element mapToDomainReduced(JpaElement jpaElement) {
+        Page page = new Page();
+        page.setId(jpaElement.getId());
+
+        Element element = new ElementImage(jpaElement.getId(), this.getPosition(),
+                page, this.type, this.url);
         return element;
     }
 

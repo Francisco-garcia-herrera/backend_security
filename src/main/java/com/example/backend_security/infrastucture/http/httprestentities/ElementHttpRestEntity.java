@@ -10,14 +10,19 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public abstract class ElementHttpRestEntity implements ElementInterfaceHttpRestEntity {
+
     private Long id;
+
     private Integer position;
 
-    public ElementHttpRestEntity(Integer position) {
+    private PageHttpRestEntity page;
+
+    public ElementHttpRestEntity(Integer position, PageHttpRestEntity page) {
         this.position = position;
+        this.page = page;
     }
 
-    public String getType(){
+    public String getType() {
         return "";
     }
 }
