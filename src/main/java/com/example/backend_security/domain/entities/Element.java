@@ -10,7 +10,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public abstract class Element implements ElementInterface {
+
     private Long id;
+
     private Integer position;
 
     public Element(Integer position) {

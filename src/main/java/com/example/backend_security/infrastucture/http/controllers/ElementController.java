@@ -17,6 +17,8 @@ import com.example.backend_security.domain.entities.Element;
 import com.example.backend_security.domain.usecases.elements.GetAllElements;
 import com.example.backend_security.domain.usecases.elements.image.DeleteElementImage;
 import com.example.backend_security.infrastucture.adapter.DomainToDtoAdapter;
+import com.example.backend_security.infrastucture.database.entities.JpaElement;
+import com.example.backend_security.infrastucture.database.queries.JpaElementQueries;
 import com.example.backend_security.infrastucture.http.httprestentities.ElementHttpRestEntity;
 
 import org.springframework.http.HttpStatus;
@@ -36,6 +38,8 @@ public class ElementController {
     private DomainToDtoAdapter domainToDtoAdapter;
     @Autowired
     private DeleteElementImage deleteElement;
+    @Autowired
+    private JpaElementQueries jpaElementQueries;
 
     @GetMapping("/get-all")
     public ResponseEntity<?> getAll() {
@@ -48,6 +52,20 @@ public class ElementController {
         body = domainToDtoAdapter.convert(elementsDomain);
 
         toReturn = new ResponseEntity<>(body, status);
+        return toReturn;
+    }
+
+    @GetMapping("/jpa")
+    public ResponseEntity<?> jpa() {
+        List<ElementHttpRestEntity> body = new ArrayList<>();
+        HttpStatus status = HttpStatus.OK;
+        ResponseEntity<?> toReturn;
+        List<JpaElement> elementsJpa = new ArrayList<>();
+
+        elementsJpa = jpaElementQueries.findAll();
+        /* body = domainToDtoAdapter.convert(elementsDomain); */
+
+        toReturn = new ResponseEntity<>(elementsJpa, status);
         return toReturn;
     }
 

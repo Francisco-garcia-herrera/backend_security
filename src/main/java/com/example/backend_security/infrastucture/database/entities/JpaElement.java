@@ -13,7 +13,10 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,7 +27,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
+@EqualsAndHashCode(exclude = { "page" })
 public abstract class JpaElement implements JpaElementInterface {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +39,7 @@ public abstract class JpaElement implements JpaElementInterface {
 
     @ManyToOne
     @JoinColumn(name = "page_id")
+    @JsonIgnoreProperties("elements")
     private JpaPage page;
 
     public JpaElement(Integer position) {
