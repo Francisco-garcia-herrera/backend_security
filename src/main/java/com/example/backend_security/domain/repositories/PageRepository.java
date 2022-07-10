@@ -9,4 +9,10 @@ public interface PageRepository {
     List<Page> getAll();
 
     Page getPageById(Long pageId);
+
+    Page save(Page page);
+
+    void delete(Long id);
+
+    Page update(Page page);
 }

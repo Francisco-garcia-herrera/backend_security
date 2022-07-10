@@ -32,14 +32,14 @@ public class JpaElementImage extends JpaElement {
 
     private String url;
 
-    public JpaElementImage(Integer position, String type, String url) {
-        super(position);
+    public JpaElementImage(Integer position, JpaPage jpaPage, String type, String url) {
+        super(position, jpaPage);
         this.type = type;
         this.url = url;
     }
 
-    public JpaElementImage(Long id, Integer position, String type, String url) {
-        super(id, position);
+    public JpaElementImage(Long id, Integer position, JpaPage jpaPage, String type, String url) {
+        super(id, position, jpaPage);
         this.type = type;
         this.url = url;
     }
@@ -52,7 +52,7 @@ public class JpaElementImage extends JpaElement {
 
     public Element mapToDomainReduced(JpaElement jpaElement) {
         Page page = new Page();
-        page.setId(jpaElement.getId());
+        page.setId(jpaElement.getPage().getId());
 
         Element element = new ElementImage(jpaElement.getId(), this.getPosition(),
                 page, this.type, this.url);

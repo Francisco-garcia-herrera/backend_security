@@ -54,4 +54,43 @@ public class JpaPageRepository implements PageRepository {
         return page;
     }
 
+    @Override
+    public Page save(Page page) {
+        JpaPage saved = null;
+        try {
+            JpaPage jpaPage = domainToJpaAdapter.convert(page);
+            saved = this.jpaPageQueries.save(jpaPage);
+        } catch (Exception e) {
+            System.out.println("Exception save JpaPageRepository " + e);
+        }
+        return jpaToDomainAdapter.convert(saved);
+    }
+
+    @Override
+    public void delete(Long id) {
+        if (id == null)
+            return;
+        try {
+            this.jpaPageQueries.deleteById(id);
+        } catch (Exception e) {
+            /* throw new T2cDataBaseException("Error deleting md ict element, " + e); */
+            System.out.println("Exception delete JpaPageRepository " + e);
+        }
+    }
+
+    @Override
+    public Page update(Page page) {
+        if (page == null)
+            return null;
+        JpaPage saved = null;
+        try {
+            JpaPage jpaPage = domainToJpaAdapter.convert(page);
+            saved = this.jpaPageQueries.saveAndFlush(jpaPage);
+        } catch (Exception e) {
+            /* throw new T2cDataBaseException("Error deleting md ict element, " + e); */
+            System.out.println("Exception update JpaElementRepository " + e);
+        }
+        return jpaToDomainAdapter.convert(saved);
+    }
+
 }

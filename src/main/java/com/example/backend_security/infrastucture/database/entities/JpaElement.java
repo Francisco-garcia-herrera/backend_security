@@ -42,8 +42,9 @@ public abstract class JpaElement implements JpaElementInterface {
     @JsonIgnoreProperties("elements")
     private JpaPage page;
 
-    public JpaElement(Integer position) {
+    public JpaElement(Integer position, JpaPage page) {
         this.position = position;
+        this.page = page;
     }
 
     public JpaElement(Long id, Integer position) {

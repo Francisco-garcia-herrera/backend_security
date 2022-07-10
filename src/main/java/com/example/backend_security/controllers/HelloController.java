@@ -18,7 +18,7 @@ import com.example.backend_security.infrastucture.adapter.JpaToDomainAdapter;
 import com.example.backend_security.infrastucture.database.entities.JpaElement;
 import com.example.backend_security.infrastucture.database.entities.JpaElementImage;
 import com.example.backend_security.infrastucture.database.entities.JpaElementVideo;
-
+import com.example.backend_security.infrastucture.database.entities.JpaPage;
 import com.example.backend_security.infrastucture.database.queries.JpaElementQueries;
 
 @Lazy
@@ -75,10 +75,12 @@ public class HelloController {
         System.out.println(auth.isAuthenticated());
 
         List<JpaElement> elements = new ArrayList<>();
-        elements.add(new JpaElementImage(1, "IMAGE", "URL IMAGE"));
-        elements.add(new JpaElementVideo(2, "VIDEO", "H264"));
-        elements.add(new JpaElementImage(3, "IMAGE", "URL IMAGE 2"));
-        elements.add(new JpaElementVideo(4, "VIDEO", "H264 2"));
+        JpaPage jpaPage = new JpaPage();
+        jpaPage.setId(1L);
+        elements.add(new JpaElementImage(1, jpaPage, "IMAGE", "URL IMAGE"));
+        elements.add(new JpaElementVideo(2, jpaPage, "VIDEO", "H264"));
+        elements.add(new JpaElementImage(3, jpaPage, "IMAGE", "URL IMAGE 2"));
+        elements.add(new JpaElementVideo(4, jpaPage, "VIDEO", "H264 2"));
         for (JpaElement jpaElement : elements) {
             jpaElementQueries.saveAndFlush(jpaElement);
         }

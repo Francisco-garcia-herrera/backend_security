@@ -57,13 +57,11 @@ public class ElementController {
 
     @GetMapping("/jpa")
     public ResponseEntity<?> jpa() {
-        List<ElementHttpRestEntity> body = new ArrayList<>();
         HttpStatus status = HttpStatus.OK;
         ResponseEntity<?> toReturn;
         List<JpaElement> elementsJpa = new ArrayList<>();
 
         elementsJpa = jpaElementQueries.findAll();
-        /* body = domainToDtoAdapter.convert(elementsDomain); */
 
         toReturn = new ResponseEntity<>(elementsJpa, status);
         return toReturn;
@@ -80,7 +78,7 @@ public class ElementController {
             logger.error("Generic uncontrolled ERROR", e);
             return new ResponseEntity<>(e.getMessage(), status);
         } finally {
-            toReturn = new ResponseEntity<>("Succesfully deleted", status);
+            toReturn = new ResponseEntity<>("Element succesfully deleted", status);
             logger.debug(". Status<" + status + ">");
         }
         return toReturn;

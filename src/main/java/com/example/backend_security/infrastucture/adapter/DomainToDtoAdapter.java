@@ -3,8 +3,6 @@ package com.example.backend_security.infrastucture.adapter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.example.backend_security.domain.entities.Element;
@@ -14,10 +12,8 @@ import com.example.backend_security.infrastucture.http.httprestentities.PageHttp
 
 @Component
 public class DomainToDtoAdapter {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public static ElementHttpRestEntity convert(Element object) {
-        /* logger.info("Conver Element to Element HttpRest"); */
         return object.mapToDto(object);
     }
 

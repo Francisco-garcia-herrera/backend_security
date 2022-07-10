@@ -32,8 +32,8 @@ public class JpaElementVideo extends JpaElement {
 
     private String codec;
 
-    public JpaElementVideo(Integer position, String type, String codec) {
-        super(position);
+    public JpaElementVideo(Integer position, JpaPage jpaPage, String type, String codec) {
+        super(position, jpaPage);
         this.type = type;
         this.codec = codec;
 
@@ -53,7 +53,7 @@ public class JpaElementVideo extends JpaElement {
 
     public Element mapToDomainReduced(JpaElement jpaElement) {
         Page page = new Page();
-        page.setId(jpaElement.getId());
+        page.setId(jpaElement.getPage().getId());
 
         Element element = new ElementVideo(jpaElement.getId(), this.getPosition(),
                 page, this.type, this.codec);

@@ -24,14 +24,15 @@ public class PageHttpRestEntity {
 
     private List<ElementHttpRestEntity> elements;
 
-    public Page maptoDomain(PageHttpRestEntity pageHttpRestEntity) {
+    public Page mapToDomain(PageHttpRestEntity pageHttpRestEntity) {
 
         List<Element> elements = new ArrayList<>();
-        for (ElementHttpRestEntity elementHttpRestEntity : pageHttpRestEntity.getElements()) {
-            Element element = elementHttpRestEntity.mapToDomain(elementHttpRestEntity);
-            elements.add(element);
+        if (pageHttpRestEntity.getElements() != null) {
+            for (ElementHttpRestEntity elementHttpRestEntity : pageHttpRestEntity.getElements()) {
+                Element element = elementHttpRestEntity.mapToDomain(elementHttpRestEntity);
+                elements.add(element);
+            }
         }
-
         Page page = new Page(pageHttpRestEntity.getId(), pageHttpRestEntity.getName(), elements);
 
         return page;

@@ -1,7 +1,5 @@
 package com.example.backend_security.domain.usecases.pages;
 
-import java.util.List;
-
 import com.example.backend_security.domain.entities.Page;
 import com.example.backend_security.domain.repositories.PageRepository;
 

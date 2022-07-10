@@ -1,4 +1,4 @@
-package com.example.backend_security.domain.usecases.elements.image;
+package com.example.backend_security.domain.usecases.pages;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,19 +6,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.backend_security.domain.entities.Element;
+import com.example.backend_security.domain.entities.Page;
 import com.example.backend_security.domain.repositories.ElementRepository;
+import com.example.backend_security.domain.repositories.PageRepository;
 
 @Service
-public class CreateElementImage {
+public class CreatePage {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    ElementRepository elementRepository;
+    PageRepository pageRepository;
 
-    public Element create(Element elementToCreate) {
+    public Page create(Page pageToCreate) {
 
         logger.info("Create Element Usecase");
-        return elementRepository.save(elementToCreate);
+        return pageRepository.save(pageToCreate);
     }
 
 }
