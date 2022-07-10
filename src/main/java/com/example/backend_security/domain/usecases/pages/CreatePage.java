@@ -5,9 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.backend_security.domain.entities.Element;
 import com.example.backend_security.domain.entities.Page;
-import com.example.backend_security.domain.repositories.ElementRepository;
 import com.example.backend_security.domain.repositories.PageRepository;
 
 @Service
