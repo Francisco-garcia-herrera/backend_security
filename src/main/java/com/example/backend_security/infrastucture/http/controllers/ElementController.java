@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend_security.domain.entities.Element;
 import com.example.backend_security.domain.usecases.elements.GetAllElements;
-import com.example.backend_security.domain.usecases.elements.image.DeleteElementImage;
+import com.example.backend_security.domain.usecases.elements.GetElement;
+import com.example.backend_security.domain.usecases.elements.DeleteElement;
 import com.example.backend_security.infrastucture.adapter.DomainToDtoAdapter;
 import com.example.backend_security.infrastucture.database.entities.JpaElement;
 import com.example.backend_security.infrastucture.database.queries.JpaElementQueries;
@@ -35,9 +36,11 @@ public class ElementController {
     @Autowired
     private GetAllElements getAllElements;
     @Autowired
+    private GetElement getElement;
+    @Autowired
     private DomainToDtoAdapter domainToDtoAdapter;
     @Autowired
-    private DeleteElementImage deleteElement;
+    private DeleteElement deleteElement;
     @Autowired
     private JpaElementQueries jpaElementQueries;
 
@@ -50,6 +53,20 @@ public class ElementController {
 
         elementsDomain = getAllElements.get();
         body = domainToDtoAdapter.convert(elementsDomain);
+
+        toReturn = new ResponseEntity<>(body, status);
+        return toReturn;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        ElementHttpRestEntity body = null;
+        HttpStatus status = HttpStatus.OK;
+        ResponseEntity<?> toReturn;
+        Element elementDomain = null;
+
+        elementDomain = getElement.get(id);
+        body = domainToDtoAdapter.convert(elementDomain);
 
         toReturn = new ResponseEntity<>(body, status);
         return toReturn;

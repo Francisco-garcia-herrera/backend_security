@@ -2,6 +2,7 @@ package com.example.backend_security.infrastucture.database.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.example.backend_security.domain.entities.Element;
 import com.example.backend_security.domain.repositories.ElementRepository;
@@ -35,6 +36,20 @@ public class JpaElementRepository implements ElementRepository {
             System.out.println("Exception GetAll JpaElementRepository " + e);
         }
         return jpaToDomainAdapter.convert(jpaElements);
+    }
+
+    @Override
+    public Element getElementById(Long elementId) {
+        Optional<JpaElement> jpaElement = null;
+        try {
+            jpaElement = jpaElementQueries.findById(elementId);
+        } catch (Exception e) {
+            /* throw new Exception(); */
+            System.out.println("Exception Get Element by Id JpaElementRepository " + e);
+        }
+
+        return jpaToDomainAdapter.convert(jpaElement.get());
+
     }
 
     @Override

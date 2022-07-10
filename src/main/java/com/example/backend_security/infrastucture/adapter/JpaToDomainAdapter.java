@@ -9,10 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.example.backend_security.domain.entities.Element;
+import com.example.backend_security.domain.entities.ElementCarouselData;
 import com.example.backend_security.domain.entities.Page;
 import com.example.backend_security.domain.entities.Role;
 import com.example.backend_security.domain.entities.User;
 import com.example.backend_security.infrastucture.database.entities.JpaElement;
+import com.example.backend_security.infrastucture.database.entities.JpaElementCarouselData;
 import com.example.backend_security.infrastucture.database.entities.JpaPage;
 import com.example.backend_security.infrastucture.database.entities.JpaRole;
 import com.example.backend_security.infrastucture.database.entities.JpaUser;
@@ -55,12 +57,12 @@ public class JpaToDomainAdapter {
     }
 
     public Element convert(JpaElement object) {
-        logger.info("Conver JpaElement to DomainElement");
+        logger.info("Convert JpaElement to DomainElement");
         return object.mapToDomainReduced(object);
     }
 
     public Page convert(JpaPage object) {
-        logger.info("Conver JpaPage to DomainPage");
+        logger.info("Convert JpaPage to DomainPage");
         return Page.builder()
                 .id(object.getId())
                 .name(object.getName())
@@ -69,6 +71,22 @@ public class JpaToDomainAdapter {
     }
 
     public List<Page> convertPages(List<JpaPage> objects) {
+        if (objects == null)
+            return null;
+        return objects.stream().map(this::convert).collect(Collectors.toList());
+    }
+
+    public ElementCarouselData convert(JpaElementCarouselData object) {
+        logger.info("Convert ElementCarouselData to ElementCarouselData");
+        return ElementCarouselData.builder()
+                .id(object.getId())
+                .type(object.getType())
+                .title(object.getTitle())
+                .elementCarousel(object.getElementCarousel().mapToElementCarrousel(object.getElementCarousel()))
+                .build();
+    }
+
+    public List<ElementCarouselData> convertElementCarouselDatas(List<JpaElementCarouselData> objects) {
         if (objects == null)
             return null;
         return objects.stream().map(this::convert).collect(Collectors.toList());

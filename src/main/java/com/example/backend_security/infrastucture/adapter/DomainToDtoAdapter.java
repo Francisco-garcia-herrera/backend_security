@@ -6,7 +6,9 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import com.example.backend_security.domain.entities.Element;
+import com.example.backend_security.domain.entities.ElementCarouselData;
 import com.example.backend_security.domain.entities.Page;
+import com.example.backend_security.infrastucture.http.httprestentities.ElementCarouselDataHttpRestEntity;
 import com.example.backend_security.infrastucture.http.httprestentities.ElementHttpRestEntity;
 import com.example.backend_security.infrastucture.http.httprestentities.PageHttpRestEntity;
 
@@ -45,5 +47,11 @@ public class DomainToDtoAdapter {
         if (object == null)
             return null;
         return object.mapToDtoReduced(object);
+    }
+
+    public ElementCarouselDataHttpRestEntity convert(ElementCarouselData object) {
+        if (object == null)
+            return null;
+        return object.mapToDto(object);
     }
 }

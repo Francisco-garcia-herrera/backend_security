@@ -8,6 +8,8 @@ public interface ElementRepository {
 
     List<Element> getAll();
 
+    Element getElementById(Long elementId);
+
     Element save(Element element);
 
     void delete(Long id);

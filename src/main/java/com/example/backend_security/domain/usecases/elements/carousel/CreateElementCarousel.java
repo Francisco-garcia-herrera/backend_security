@@ -1,4 +1,4 @@
-package com.example.backend_security.domain.usecases.elements.image;
+package com.example.backend_security.domain.usecases.elements.carousel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,7 @@ import com.example.backend_security.domain.entities.Element;
 import com.example.backend_security.domain.repositories.ElementRepository;
 
 @Service
-public class CreateElementImage {
+public class CreateElementCarousel {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -17,7 +17,7 @@ public class CreateElementImage {
 
     public Element create(Element elementToCreate) {
 
-        logger.info("Create Element IMAGE Usecase");
+        logger.info("Create Element CAROUSELl Usecase");
         return elementRepository.save(elementToCreate);
     }
 

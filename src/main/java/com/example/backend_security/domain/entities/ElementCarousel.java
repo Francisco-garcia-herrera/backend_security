@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.backend_security.infrastucture.database.entities.JpaElement;
+import com.example.backend_security.infrastucture.database.entities.JpaElementCarousel;
+import com.example.backend_security.infrastucture.database.entities.JpaElementCarouselData;
 import com.example.backend_security.infrastucture.http.httprestentities.ElementCarouselDataHttpRestEntity;
 import com.example.backend_security.infrastucture.http.httprestentities.ElementCarouselHttpRestEntity;
 import com.example.backend_security.infrastucture.http.httprestentities.ElementHttpRestEntity;
@@ -53,7 +55,7 @@ public class ElementCarousel extends Element {
                 ElementCarouselDataHttpRestEntity elementCarouselDataHttpRestEntity = new ElementCarouselDataHttpRestEntity(
                         elementCarouselData.getId(), elementCarouselData.getType(), elementCarouselData.getTitle(),
                         elementCarouselData.getElementCarousel()
-                                .mapToElementCarrousel(elementCarouselData.getElementCarousel()));
+                                .mapToElementCarrouselDto(elementCarouselData.getElementCarousel()));
                 elementCarouselDatas.add(elementCarouselDataHttpRestEntity);
             }
         }
@@ -65,17 +67,32 @@ public class ElementCarousel extends Element {
     }
 
     public JpaElement mapToJpa(Element element) {
-        /*
-         * JpaElement jpaElement = new JpaElementImage(this.getId(), this.getPosition(),
-         * this.getPage().mapToJpa(this.getPage()), this.type, this.url);
-         * return jpaElement;
-         */
-        return null;
+
+        List<JpaElementCarouselData> jpaElementCarouselDatas = new ArrayList<>();
+        if (this.getElementCarouselDatas() != null) {
+            for (ElementCarouselData elementCarouselData : this.getElementCarouselDatas()) {
+                JpaElementCarouselData jpaElementCarouselData = new JpaElementCarouselData(elementCarouselData.getId(),
+                        elementCarouselData.getType(), elementCarouselData.getTitle(),
+                        elementCarouselData.getElementCarousel()
+                                .mapToJpaElementCarrousel(elementCarouselData.getElementCarousel()));
+                jpaElementCarouselDatas.add(jpaElementCarouselData);
+            }
+        }
+
+        JpaElement jpaElement = new JpaElementCarousel(this.getId(), this.getPosition(),
+                this.getPage().mapToJpa(this.getPage()), this.getType(), this.getTitle(), jpaElementCarouselDatas);
+        return jpaElement;
     }
 
-    public ElementCarouselHttpRestEntity mapToElementCarrousel(ElementCarousel elementCarousel) {
+    public ElementCarouselHttpRestEntity mapToElementCarrouselDto(ElementCarousel elementCarousel) {
         ElementCarouselHttpRestEntity elementCarouselHttpRestEntity = new ElementCarouselHttpRestEntity();
         elementCarouselHttpRestEntity.setId(elementCarousel.getId());
         return elementCarouselHttpRestEntity;
+    }
+
+    public JpaElementCarousel mapToJpaElementCarrousel(ElementCarousel elementCarousel) {
+        JpaElementCarousel jpaElementCarousel = new JpaElementCarousel();
+        jpaElementCarousel.setId(elementCarousel.getId());
+        return jpaElementCarousel;
     }
 }

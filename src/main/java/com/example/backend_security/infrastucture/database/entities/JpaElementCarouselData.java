@@ -1,5 +1,6 @@
 package com.example.backend_security.infrastucture.database.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -12,11 +13,10 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.example.backend_security.domain.entities.ElementCarouselData;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,8 +40,16 @@ public class JpaElementCarouselData {
 
     private String title;
 
-    @ManyToOne
+    /* @ManyToOne(cascade = { CascadeType.ALL }) */
+    @ManyToOne(cascade = { CascadeType.MERGE })
     @JoinColumn(name = "element_id")
     private JpaElementCarousel elementCarousel;
+
+    public ElementCarouselData mapToDomain(JpaElementCarouselData jpaElementCarouselData) {
+        ElementCarouselData elementCarouselData = new ElementCarouselData(jpaElementCarouselData.getId(),
+                jpaElementCarouselData.getType(), jpaElementCarouselData.getTitle(), jpaElementCarouselData
+                        .getElementCarousel().mapToElementCarrousel(jpaElementCarouselData.getElementCarousel()));
+        return elementCarouselData;
+    }
 
 }

@@ -72,10 +72,16 @@ public class JpaElementCarousel extends JpaElement {
         List<ElementCarouselData> elementCarouselDatas = new ArrayList<>();
         if (this.elementCarouselDatas != null) {
             for (JpaElementCarouselData jpaElementCarouselData : this.elementCarouselDatas) {
+
+                ElementCarousel elementCarousel = new ElementCarousel();
+
+                if (jpaElementCarouselData.getElementCarousel() != null) {
+                    elementCarousel.setId(jpaElementCarouselData.getId());
+                }
+
                 ElementCarouselData elementCarouselData = new ElementCarouselData(jpaElementCarouselData.getId(),
                         jpaElementCarouselData.getType(), jpaElementCarouselData.getTitle(),
-                        jpaElementCarouselData.getElementCarousel()
-                                .mapToElementCarrousel(jpaElementCarouselData.getElementCarousel()));
+                        elementCarousel);
                 elementCarouselDatas.add(elementCarouselData);
             }
         }
@@ -87,7 +93,9 @@ public class JpaElementCarousel extends JpaElement {
 
     public ElementCarousel mapToElementCarrousel(JpaElementCarousel jpaElementCarousel) {
         ElementCarousel elementCarousel = new ElementCarousel();
-        elementCarousel.setId(jpaElementCarousel.getId());
+        if (jpaElementCarousel.getId() != null) {
+            elementCarousel.setId(jpaElementCarousel.getId());
+        }
         return elementCarousel;
     }
 

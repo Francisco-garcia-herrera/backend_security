@@ -6,7 +6,6 @@ import java.util.List;
 import com.example.backend_security.domain.entities.Element;
 import com.example.backend_security.domain.entities.ElementCarousel;
 import com.example.backend_security.domain.entities.ElementCarouselData;
-import com.example.backend_security.domain.entities.ElementImage;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -53,11 +52,17 @@ public class ElementCarouselHttpRestEntity extends ElementHttpRestEntity {
         if (this.getElementCarouselDatas() != null) {
 
             for (ElementCarouselDataHttpRestEntity elementCarouselDataHttpRestEntity : this.getElementCarouselDatas()) {
+
+                ElementCarousel elementCarousel = new ElementCarousel();
+
+                if (elementCarouselDataHttpRestEntity.getElementCarousel() != null) {
+                    elementCarousel.setId(elementCarouselDataHttpRestEntity.getId());
+                }
+
                 ElementCarouselData elementCarouselData = new ElementCarouselData(
                         elementCarouselDataHttpRestEntity.getId(), elementCarouselDataHttpRestEntity.getType(),
                         elementCarouselDataHttpRestEntity.getTitle(),
-                        elementCarouselDataHttpRestEntity.getElementCarousel()
-                                .mapToDomainReduced(elementCarouselDataHttpRestEntity.getElementCarousel()));
+                        elementCarousel);
                 elementCarouselDatas.add(elementCarouselData);
             }
         }
@@ -70,7 +75,9 @@ public class ElementCarouselHttpRestEntity extends ElementHttpRestEntity {
 
     public ElementCarousel mapToDomainReduced(ElementCarouselHttpRestEntity elementCarouselHttpRestEntity) {
         ElementCarousel elementCarousel = new ElementCarousel();
-        elementCarousel.setId(elementCarouselHttpRestEntity.getId());
+        if (elementCarouselHttpRestEntity.getId() != null) {
+            elementCarousel.setId(elementCarouselHttpRestEntity.getId());
+        }
         return elementCarousel;
     }
 
