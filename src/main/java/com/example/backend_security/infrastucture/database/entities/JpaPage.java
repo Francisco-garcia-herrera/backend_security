@@ -3,6 +3,7 @@ package com.example.backend_security.infrastucture.database.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -42,7 +43,7 @@ public class JpaPage {
 
     private String name;
 
-    @OneToMany(mappedBy = "page")
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.PERSIST, mappedBy = "page")
     @JsonIgnoreProperties("page")
     private List<JpaElement> elements;
 
