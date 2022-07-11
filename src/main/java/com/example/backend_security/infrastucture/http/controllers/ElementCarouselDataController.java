@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend_security.domain.entities.ElementCarouselData;
 import com.example.backend_security.domain.usecases.elements.carousel.CreateElementCarouselData;
+import com.example.backend_security.domain.usecases.elements.carouseldata.DeleteCarouselData;
 import com.example.backend_security.domain.usecases.elements.carouseldata.GetElementCarouselData;
 import com.example.backend_security.infrastucture.adapter.DomainToDtoAdapter;
 import com.example.backend_security.infrastucture.http.httprestentities.ElementCarouselDataHttpRestEntity;
@@ -29,11 +31,14 @@ public class ElementCarouselDataController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private DomainToDtoAdapter domainToDtoAdapter;
+    DomainToDtoAdapter domainToDtoAdapter;
     @Autowired
-    private GetElementCarouselData getElementCarouselData;
+    GetElementCarouselData getElementCarouselData;
     @Autowired
-    private CreateElementCarouselData createElementCarouselData;
+    CreateElementCarouselData createElementCarouselData;
+
+    @Autowired
+    DeleteCarouselData deleteCarouselData;
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
@@ -67,6 +72,23 @@ public class ElementCarouselDataController {
             return new ResponseEntity<>(e.getMessage(), status);
         } finally {
             toReturn = new ResponseEntity<>(body, status);
+            logger.debug(". Status<" + status + ">");
+        }
+        return toReturn;
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        HttpStatus status = HttpStatus.OK;
+        ResponseEntity<?> toReturn;
+        try {
+            deleteCarouselData.delete(id);
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            logger.error("Generic uncontrolled ERROR", e);
+            return new ResponseEntity<>(e.getMessage(), status);
+        } finally {
+            toReturn = new ResponseEntity<>("Carousel Data succesfully deleted", status);
             logger.debug(". Status<" + status + ">");
         }
         return toReturn;

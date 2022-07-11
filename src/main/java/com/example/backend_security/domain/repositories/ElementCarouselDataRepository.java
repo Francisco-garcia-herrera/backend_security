@@ -8,4 +8,6 @@ public interface ElementCarouselDataRepository {
 
     ElementCarouselData save(ElementCarouselData elementCarouselData);
 
+    void delete(Long id);
+
 }

@@ -31,7 +31,7 @@ public class JpaElementCarouselDataRepository implements ElementCarouselDataRepo
             jpaElementCarouselData = jpaElementCarouselDataQueries.findById(elementCarouselDataId);
         } catch (Exception e) {
             /* throw new Exception(); */
-            System.out.println("Exception Get Element by Id JpaElementRepository " + e);
+            System.out.println("Exception Get ElementCarouselData by Id JpaElementCarouselDataRepository " + e);
         }
 
         return jpaToDomainAdapter.convert(jpaElementCarouselData.get());
@@ -45,9 +45,21 @@ public class JpaElementCarouselDataRepository implements ElementCarouselDataRepo
             JpaElementCarouselData jpaElementCarouselData = domainToJpaAdapter.convert(elementCarouselData);
             saved = this.jpaElementCarouselDataQueries.save(jpaElementCarouselData);
         } catch (Exception e) {
-            System.out.println("Exception save JpaElementRepository " + e);
+            System.out.println("Exception save JpaElementCarouselDataRepository " + e);
         }
         return jpaToDomainAdapter.convert(saved);
+    }
+
+    @Override
+    public void delete(Long id) {
+        if (id == null)
+            return;
+        try {
+            this.jpaElementCarouselDataQueries.deleteById(id);
+        } catch (Exception e) {
+            /* throw new T2cDataBaseException("Error deleting md ict element, " + e); */
+            System.out.println("Exception delete JpaElementCarouselDataRepository " + e);
+        }
     }
 
 }
