@@ -23,13 +23,13 @@ public class WebSecurityConfig {
                 .cors().and().csrf().disable()
                 .httpBasic(withDefaults())
                 .authorizeRequests()
-                .antMatchers("/hello/**", "/elements/**", "/pages/**").permitAll()
+                .antMatchers("/hello/**", "/elements/**", "/pages/**", "/units/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
         return http.build();
     }
 
-        @Bean
+    @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("*"));
@@ -37,8 +37,8 @@ public class WebSecurityConfig {
         configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
         configuration.setExposedHeaders(Arrays.asList("x-auth-token"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-       source.registerCorsConfiguration("/**", configuration);
-     return source;
-   }
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
 }

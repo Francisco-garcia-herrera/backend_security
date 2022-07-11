@@ -39,7 +39,7 @@ public abstract class JpaElement implements JpaElementInterface {
 
     @ManyToOne
     @JoinColumn(name = "page_id")
-    @JsonIgnoreProperties("elements")
+    @JsonIgnoreProperties({ "elements", "unit" })
     private JpaPage page;
 
     public JpaElement(Integer position, JpaPage page) {

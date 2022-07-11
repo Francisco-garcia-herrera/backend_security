@@ -46,7 +46,6 @@ public class Page {
     }
 
     public JpaPage mapToJpa(Page page) {
-
         List<JpaElement> jpaElements = new ArrayList<>();
         if (page.getElements() != null) {
             for (Element element : page.getElements()) {
@@ -54,9 +53,7 @@ public class Page {
                 jpaElements.add(jpaElement);
             }
         }
-
         JpaPage jpaPage = new JpaPage(page.getId(), page.getName(), jpaElements);
-
         return jpaPage;
     }
 

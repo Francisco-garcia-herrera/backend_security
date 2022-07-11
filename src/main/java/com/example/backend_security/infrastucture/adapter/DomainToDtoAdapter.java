@@ -8,9 +8,11 @@ import org.springframework.stereotype.Component;
 import com.example.backend_security.domain.entities.Element;
 import com.example.backend_security.domain.entities.ElementCarouselData;
 import com.example.backend_security.domain.entities.Page;
+import com.example.backend_security.domain.entities.Unit;
 import com.example.backend_security.infrastucture.http.httprestentities.ElementCarouselDataHttpRestEntity;
 import com.example.backend_security.infrastucture.http.httprestentities.ElementHttpRestEntity;
 import com.example.backend_security.infrastucture.http.httprestentities.PageHttpRestEntity;
+import com.example.backend_security.infrastucture.http.httprestentities.UnitHttpRestEntity;
 
 @Component
 public class DomainToDtoAdapter {
@@ -37,6 +39,12 @@ public class DomainToDtoAdapter {
         return object.mapToDto(object);
     }
 
+    public static PageHttpRestEntity convert(Page object) {
+        if (object == null)
+            return null;
+        return object.mapToDtoReduced(object);
+    }
+
     public List<PageHttpRestEntity> convertPagesReduced(List<Page> objects) {
         if (objects == null)
             return null;
@@ -50,6 +58,18 @@ public class DomainToDtoAdapter {
     }
 
     public ElementCarouselDataHttpRestEntity convert(ElementCarouselData object) {
+        if (object == null)
+            return null;
+        return object.mapToDto(object);
+    }
+
+    public List<UnitHttpRestEntity> convertUnits(List<Unit> objects) {
+        if (objects == null)
+            return null;
+        return objects.stream().map(this::convertUnitReduced).collect(Collectors.toList());
+    }
+
+    public UnitHttpRestEntity convertUnitReduced(Unit object) {
         if (object == null)
             return null;
         return object.mapToDto(object);

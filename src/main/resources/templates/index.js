@@ -1,11 +1,19 @@
 const BASE_URL = 'http://localhost:8080';
 
+let pageSelected = 0;
+
+
+function init(){
+    getAllUnits();
+    getAllPages();
+}
+
 async function getAllPages(){
     let htmlResponse = "<ul class='list-group'>";
     try {
     const response = await axios.get(`${BASE_URL}/pages/get-all`);
     response.data.forEach(page => {
-        htmlResponse += "<li class='list-group-item'>"+page.name+" | <a onclick='deletePage("+page.id+")'><i class='bi bi-x-circle'></i></a></li>";
+        htmlResponse += "<li class='list-group-item'><a onclick='getPage("+page.id+")'>"+page.name+"</a> | <a onclick='deletePage("+page.id+")'><i class='bi bi-x-circle'></i></a></li>";
     });
     htmlResponse += "</ul>";
     document.getElementById("pagesList").innerHTML = htmlResponse;
@@ -15,10 +23,11 @@ async function getAllPages(){
     }
 }
 
-async function getPage(){
+async function getPage(id){
+    pageSelected = id;
     let htmlResponse = "";
     try {
-    const response = await axios.get(`${BASE_URL}/pages/1`);
+    const response = await axios.get(`${BASE_URL}/pages/`+id);
     console.log(response.data);
     htmlResponse += response.data.name;
     htmlResponse += "<ul class='list-group'>";
@@ -73,7 +82,7 @@ async function addElementImage(){
     const element = {
         "position": 200,
         "page": {
-            "id": 1
+            "id": pageSelected
         },
         "type": "IMAGE",
         "url" : "IMAGE URL 200"
@@ -83,7 +92,7 @@ async function addElementImage(){
     } catch (errors) {
     console.error(errors);
     }
-    getPage();
+    getPage(pageSelected);
 }
 
 async function addElementCarousel(){
@@ -91,7 +100,7 @@ async function addElementCarousel(){
     const element = {
         "position": 99,
         "page": {
-            "id": 1
+            "id": pageSelected
         },
         "type": "CAROUSEL",
         "title" : "CAROUSEL 300"
@@ -101,7 +110,7 @@ async function addElementCarousel(){
     } catch (errors) {
     console.error(errors);
     }
-    getPage();
+    getPage(pageSelected);
 }
 
 async function addElementCarouselData(elementCarouselId){
@@ -118,7 +127,7 @@ async function addElementCarouselData(elementCarouselId){
     } catch (errors) {
     console.error(errors);
     }
-    getPage();
+    getPage(pageSelected);
 }
 
 async function deleteElementCarouselData(id){
@@ -128,7 +137,7 @@ async function deleteElementCarouselData(id){
     } catch (errors) {
     console.error(errors);
     }
-    getPage();
+    getPage(pageSelected);
 }
 
 
@@ -139,5 +148,21 @@ async function deleteElement(id){
     } catch (errors) {
     console.error(errors);
     }
-    getPage();
+    getPage(pageSelected);
+}
+
+
+async function getAllUnits(){
+    let htmlResponse = "<ul class='list-group'>";
+    try {
+    const response = await axios.get(`${BASE_URL}/units/get-all`);
+    response.data.forEach(unit => {
+        htmlResponse += "<li class='list-group-item'>"+unit.name+" | <a onclick='deleteUnit("+unit.id+")'><i class='bi bi-x-circle'></i></a></li>";
+    });
+    htmlResponse += "</ul>";
+    document.getElementById("unitList").innerHTML = htmlResponse;
+    return response.data;
+    } catch (errors) {
+    console.error(errors);
+    }
 }

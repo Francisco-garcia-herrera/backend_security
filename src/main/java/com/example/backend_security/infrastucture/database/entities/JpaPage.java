@@ -9,8 +9,8 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -33,8 +33,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
-@EqualsAndHashCode(exclude = "elements")
+@EqualsAndHashCode(exclude = { "elements", "unit" })
 public class JpaPage {
 
     @Id
@@ -46,6 +45,18 @@ public class JpaPage {
     @OneToMany(orphanRemoval = true, cascade = CascadeType.PERSIST, mappedBy = "page")
     @JsonIgnoreProperties("page")
     private List<JpaElement> elements;
+
+    @ManyToOne
+    @JoinColumn(name = "unit_id")
+    @JsonIgnoreProperties("elements")
+    private JpaUnit unit;
+
+    public JpaPage(Long id, String name, List<JpaElement> jpaElements) {
+        this.id = id;
+        this.name = name;
+        this.elements = jpaElements;
+
+    }
 
     public Page mapToDomain(JpaPage jpaPage) {
         List<Element> elements = new ArrayList<>();
