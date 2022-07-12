@@ -10,6 +10,8 @@ public interface PageRepository {
 
     Page getPageById(Long pageId);
 
+    List<Page> getPagesByUnitId(Long unitId);
+
     Page save(Page page);
 
     void delete(Long id);

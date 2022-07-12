@@ -20,6 +20,7 @@ import com.example.backend_security.domain.entities.Page;
 import com.example.backend_security.domain.usecases.pages.CreatePage;
 import com.example.backend_security.domain.usecases.pages.DeletePage;
 import com.example.backend_security.domain.usecases.pages.GetAllPages;
+import com.example.backend_security.domain.usecases.pages.GetAllPagesByUnit;
 import com.example.backend_security.domain.usecases.pages.GetPage;
 import com.example.backend_security.domain.usecases.pages.UpdatePage;
 import com.example.backend_security.infrastucture.adapter.DomainToDtoAdapter;
@@ -38,6 +39,9 @@ public class PageController {
 
     @Autowired
     private GetAllPages getAllPages;
+
+    @Autowired
+    private GetAllPagesByUnit getAllPagesByUnit;
 
     @Autowired
     private GetPage getPage;
@@ -62,6 +66,20 @@ public class PageController {
         List<Page> pagesDomain = new ArrayList<>();
 
         pagesDomain = getAllPages.get();
+        body = domainToDtoAdapter.convertPagesReduced(pagesDomain);
+
+        toReturn = new ResponseEntity<>(body, status);
+        return toReturn;
+    }
+
+    @GetMapping("/get-all-by-unit/{id}")
+    public ResponseEntity<?> getAllPagesByUnitId(@PathVariable Long id) {
+        List<PageHttpRestEntity> body = new ArrayList<>();
+        HttpStatus status = HttpStatus.OK;
+        ResponseEntity<?> toReturn;
+        List<Page> pagesDomain = new ArrayList<>();
+
+        pagesDomain = getAllPagesByUnit.get(id);
         body = domainToDtoAdapter.convertPagesReduced(pagesDomain);
 
         toReturn = new ResponseEntity<>(body, status);

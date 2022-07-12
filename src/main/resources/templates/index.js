@@ -1,17 +1,41 @@
 const BASE_URL = 'http://localhost:8080';
 
-let pageSelected = 0;
+let pageSelected = 1;
+let unitSelected = 1;
 
 
 function init(){
     getAllUnits();
-    getAllPages();
+}
+
+function resetElementList(){
+    document.getElementById("pageInfo").innerHTML = "";
+}
+
+function resetPageList(){
+    document.getElementById("pagesList").innerHTML = "";
 }
 
 async function getAllPages(){
     let htmlResponse = "<ul class='list-group'>";
     try {
     const response = await axios.get(`${BASE_URL}/pages/get-all`);
+    response.data.forEach(page => {
+        htmlResponse += "<li class='list-group-item'><a onclick='getPage("+page.id+")'>"+page.name+"</a> | <a onclick='deletePage("+page.id+")'><i class='bi bi-x-circle'></i></a></li>";
+    });
+    htmlResponse += "</ul>";
+    document.getElementById("pagesList").innerHTML = htmlResponse;
+    return response.data;
+    } catch (errors) {
+    console.error(errors);
+    }
+}
+
+async function getAllPagesByUnitId(unitId){
+    unitSelected = unitId;
+    let htmlResponse = "<ul class='list-group'>";
+    try {
+    const response = await axios.get(`${BASE_URL}/pages/get-all-by-unit/`+ unitId);
     response.data.forEach(page => {
         htmlResponse += "<li class='list-group-item'><a onclick='getPage("+page.id+")'>"+page.name+"</a> | <a onclick='deletePage("+page.id+")'><i class='bi bi-x-circle'></i></a></li>";
     });
@@ -63,7 +87,7 @@ async function addPage(){
     } catch (errors) {
     console.error(errors);
     }
-    getAllPages();
+    getAllPagesByUnitId(unitSelected);
 }
 
 async function deletePage(id){
@@ -157,7 +181,7 @@ async function getAllUnits(){
     try {
     const response = await axios.get(`${BASE_URL}/units/get-all`);
     response.data.forEach(unit => {
-        htmlResponse += "<li class='list-group-item'>"+unit.name+" | <a onclick='deleteUnit("+unit.id+")'><i class='bi bi-x-circle'></i></a></li>";
+        htmlResponse += "<li class='list-group-item'><a onclick='getAllPagesByUnitId("+unit.id+")'>"+unit.name+"</a> | <a onclick='deleteUnit("+unit.id+")'><i class='bi bi-x-circle'></i></a></li>";
     });
     htmlResponse += "</ul>";
     document.getElementById("unitList").innerHTML = htmlResponse;
@@ -165,4 +189,19 @@ async function getAllUnits(){
     } catch (errors) {
     console.error(errors);
     }
+}
+
+
+async function addUnit(){
+    try {
+    const unit = {"name": "New Unit"};
+    const response = await axios.post(`${BASE_URL}/units`,unit);
+    console.log(response);
+    } catch (errors) {
+    console.error(errors);
+    }
+    
+    resetPageList();
+    resetElementList();
+    getAllUnits();
 }

@@ -55,6 +55,18 @@ public class JpaPageRepository implements PageRepository {
     }
 
     @Override
+    public List<Page> getPagesByUnitId(Long unitId) {
+        List<JpaPage> jpaPages = new ArrayList<>();
+        try {
+            jpaPages = jpaPageQueries.findByUnitId(unitId);
+        } catch (Exception e) {
+            /* throw new Exception(); */
+            System.out.println("Exception GetAll JpaElementRepository " + e);
+        }
+        return jpaToDomainAdapter.convertPages(jpaPages);
+    }
+
+    @Override
     public Page save(Page page) {
         JpaPage saved = null;
         try {
