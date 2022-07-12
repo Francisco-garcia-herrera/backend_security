@@ -37,4 +37,16 @@ public class JpaUnitRepository implements UnitRepository {
         return jpaToDomainAdapter.convertUnits(jpaUnits);
     }
 
+    @Override
+    public Unit save(Unit unit) {
+        JpaUnit saved = null;
+        try {
+            JpaUnit jpaUnit = domainToJpaAdapter.convert(unit);
+            saved = this.jpaUnitQueries.save(jpaUnit);
+        } catch (Exception e) {
+            System.out.println("Exception save JpaUnitRepository " + e);
+        }
+        return jpaToDomainAdapter.convert(saved);
+    }
+
 }
