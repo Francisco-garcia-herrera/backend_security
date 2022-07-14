@@ -53,7 +53,7 @@ async function getPage(id){
     try {
     const response = await axios.get(`${BASE_URL}/pages/`+id);
     console.log(response.data);
-    htmlResponse += response.data.name;
+    htmlResponse += "name: "+response.data.name;
     htmlResponse += "<ul class='list-group'>";
     /* response.data.elements.sort(function(a, b){return a.position - b.position}); */
     response.data.elements.forEach(element => {
@@ -81,7 +81,12 @@ async function getPage(id){
 
 async function addPage(){
     try {
-    const page = {"name": "New Page"};
+    const page = {
+        "name": "New Page",
+        "unit": {
+            "id": unitSelected
+        }
+    };
     const response = await axios.post(`${BASE_URL}/pages`,page);
     console.log(response);
     } catch (errors) {

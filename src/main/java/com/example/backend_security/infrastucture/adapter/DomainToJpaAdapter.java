@@ -34,7 +34,7 @@ public class DomainToJpaAdapter {
             }
         }
 
-        JpaPage jpaPage = new JpaPage(object.getId(), object.getName(), jpaElements);
+        JpaPage jpaPage = new JpaPage(object.getId(), object.getName(), jpaElements, object.getUnit().mapToJpa());
         return jpaPage;
     }
 

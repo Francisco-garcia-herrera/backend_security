@@ -44,6 +44,7 @@ public class Page {
     public PageHttpRestEntity mapToDtoReduced() {
         return PageHttpRestEntity.builder()
                 .id(this.getId())
+                .name(this.getName() != null ? this.getName() : null)
                 .unit(this.getUnit() != null ? this.getUnit().mapToDtoReduced() : null)
                 .build();
     }
