@@ -35,4 +35,10 @@ public class Unit {
                 .build();
     }
 
+    public UnitHttpRestEntity mapToDtoReduced() {
+        return UnitHttpRestEntity.builder()
+                .id(this.getId())
+                .build();
+    }
+
 }

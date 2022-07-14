@@ -64,7 +64,7 @@ public class JpaPage {
             Element element = jpaElement.mapToDomainReduced();
             elements.add(element);
         }
-        Page page = new Page(this.getId(), this.getName(), elements);
+        Page page = new Page(this.getId(), this.getName(), elements, this.getUnit().mapToDomainReduced());
         return page;
     }
 

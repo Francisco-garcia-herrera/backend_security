@@ -28,6 +28,8 @@ public class Page {
 
     private List<Element> elements;
 
+    private Unit unit;
+
     public PageHttpRestEntity mapToDto() {
         return PageHttpRestEntity.builder()
                 .id(this.getId())
@@ -35,13 +37,14 @@ public class Page {
                 .elements(this.getElements() != null
                         ? this.getElements().stream().map(DomainToDtoAdapter::convert).collect(Collectors.toList())
                         : null)
+                .unit(this.getUnit().mapToDtoReduced())
                 .build();
     }
 
     public PageHttpRestEntity mapToDtoReduced() {
         return PageHttpRestEntity.builder()
                 .id(this.getId())
-                .name(this.getName())
+                .unit(this.getUnit() != null ? this.getUnit().mapToDtoReduced() : null)
                 .build();
     }
 

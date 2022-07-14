@@ -24,6 +24,8 @@ public class PageHttpRestEntity {
 
     private List<ElementHttpRestEntity> elements;
 
+    private UnitHttpRestEntity unit;
+
     public Page mapToDomain() {
 
         List<Element> elements = new ArrayList<>();
@@ -33,7 +35,7 @@ public class PageHttpRestEntity {
                 elements.add(element);
             }
         }
-        Page page = new Page(this.getId(), this.getName(), elements);
+        Page page = new Page(this.getId(), this.getName(), elements, this.getUnit().mapToDomain());
 
         return page;
     }

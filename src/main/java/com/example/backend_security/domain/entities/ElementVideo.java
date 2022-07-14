@@ -40,7 +40,7 @@ public class ElementVideo extends Element {
 
     public ElementHttpRestEntity mapToDto() {
         ElementHttpRestEntity elementHttpRestEntity = new ElementVideoHttpRestEntity(this.getId(),
-                this.getPosition(), this.getPage().mapToDto(), this.type, this.codec);
+                this.getPosition(), this.getPage().mapToDtoReduced(), this.type, this.codec);
         return elementHttpRestEntity;
     }
 

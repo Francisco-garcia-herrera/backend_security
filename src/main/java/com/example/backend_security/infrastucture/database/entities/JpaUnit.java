@@ -54,4 +54,18 @@ public class JpaUnit {
         Unit unit = new Unit(this.getId(), this.getName(), pages);
         return unit;
     }
+
+    public Unit mapToDomainReduced() {
+        /*
+         * List<Page> pages = new ArrayList<>();
+         * if (this.getPages() != null) {
+         * for (JpaPage jpaPage : this.getPages()) {
+         * pages.add(jpaPage.mapToDomain());
+         * }
+         * }
+         */
+        Unit unit = new Unit();
+        unit.setId(this.getId());
+        return unit;
+    }
 }

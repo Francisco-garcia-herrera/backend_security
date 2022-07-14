@@ -39,7 +39,7 @@ public class ElementImage extends Element {
 
     public ElementHttpRestEntity mapToDto() {
         ElementHttpRestEntity elementHttpRestEntity = new ElementImageHttpRestEntity(this.getId(),
-                this.getPosition(), this.getPage().mapToDto(), this.type, this.url);
+                this.getPosition(), this.getPage().mapToDtoReduced(), this.type, this.url);
         return elementHttpRestEntity;
     }
 

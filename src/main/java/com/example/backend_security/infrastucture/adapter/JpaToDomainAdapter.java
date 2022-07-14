@@ -69,6 +69,7 @@ public class JpaToDomainAdapter {
                 .id(object.getId())
                 .name(object.getName())
                 .elements(convert(object.getElements()))
+                .unit(object.getUnit().mapToDomainReduced())
                 .build();
     }
 
