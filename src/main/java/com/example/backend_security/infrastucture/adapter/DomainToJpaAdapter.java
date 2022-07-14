@@ -40,7 +40,7 @@ public class DomainToJpaAdapter {
 
     public JpaElementCarouselData convert(ElementCarouselData object) {
         JpaElementCarouselData jpaElementCarouselData = new JpaElementCarouselData(object.getId(), object.getType(),
-                object.getTitle(), object.getElementCarousel().mapToJpaElementCarrousel(object.getElementCarousel()));
+                object.getTitle(), object.getElementCarousel().mapToJpaElementCarrousel());
         return jpaElementCarouselData;
     }
 

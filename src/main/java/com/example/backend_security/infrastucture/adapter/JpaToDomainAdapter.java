@@ -98,7 +98,7 @@ public class JpaToDomainAdapter {
                 .id(object.getId())
                 .type(object.getType())
                 .title(object.getTitle())
-                .elementCarousel(object.getElementCarousel().mapToElementCarrousel(object.getElementCarousel()))
+                .elementCarousel(object.getElementCarousel().mapToElementCarrousel())
                 .build();
     }
 

@@ -62,7 +62,7 @@ public class ElementCarouselDataController {
         ResponseEntity<?> toReturn;
         try {
             // Long userId = getAuthUserId();
-            ElementCarouselData elementCarouselData = data.mapToDomain(data);
+            ElementCarouselData elementCarouselData = data.mapToDomain();
             createdElement = createElementCarouselData.create(elementCarouselData);
             body = domainToDtoAdapter.convert(createdElement);
 

@@ -24,15 +24,15 @@ public class UnitHttpRestEntity {
 
     private List<PageHttpRestEntity> pages;
 
-    public Unit mapToDomain(UnitHttpRestEntity unitHttpRestEntity) {
+    public Unit mapToDomain() {
 
         List<Page> pages = new ArrayList<>();
-        if (unitHttpRestEntity.getPages() != null) {
-            for (PageHttpRestEntity pagetHttpRestEntity : unitHttpRestEntity.getPages()) {
-                pages.add(pagetHttpRestEntity.mapToDomain(pagetHttpRestEntity));
+        if (this.getPages() != null) {
+            for (PageHttpRestEntity pagetHttpRestEntity : this.getPages()) {
+                pages.add(pagetHttpRestEntity.mapToDomain());
             }
         }
-        Unit unit = new Unit(unitHttpRestEntity.getId(), unitHttpRestEntity.getName(), pages);
+        Unit unit = new Unit(this.getId(), this.getName(), pages);
 
         return unit;
     }

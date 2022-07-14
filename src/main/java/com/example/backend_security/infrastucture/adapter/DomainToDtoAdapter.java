@@ -36,13 +36,13 @@ public class DomainToDtoAdapter {
     public PageHttpRestEntity convertPage(Page object) {
         if (object == null)
             return null;
-        return object.mapToDto(object);
+        return object.mapToDto();
     }
 
     public static PageHttpRestEntity convert(Page object) {
         if (object == null)
             return null;
-        return object.mapToDtoReduced(object);
+        return object.mapToDtoReduced();
     }
 
     public List<PageHttpRestEntity> convertPagesReduced(List<Page> objects) {
@@ -54,13 +54,13 @@ public class DomainToDtoAdapter {
     public PageHttpRestEntity convertPageReduced(Page object) {
         if (object == null)
             return null;
-        return object.mapToDtoReduced(object);
+        return object.mapToDtoReduced();
     }
 
     public ElementCarouselDataHttpRestEntity convert(ElementCarouselData object) {
         if (object == null)
             return null;
-        return object.mapToDto(object);
+        return object.mapToDto();
     }
 
     public List<UnitHttpRestEntity> convertUnits(List<Unit> objects) {
@@ -72,6 +72,6 @@ public class DomainToDtoAdapter {
     public UnitHttpRestEntity convertUnitReduced(Unit object) {
         if (object == null)
             return null;
-        return object.mapToDto(object);
+        return object.mapToDto();
     }
 }

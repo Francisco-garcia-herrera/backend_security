@@ -68,15 +68,15 @@ public class ElementCarouselHttpRestEntity extends ElementHttpRestEntity {
         }
 
         Element element = new ElementCarousel(this.getId(), this.getPosition(),
-                this.getPage().mapToDomain(this.getPage()),
+                this.getPage().mapToDomain(),
                 this.type, this.title, elementCarouselDatas);
         return element;
     }
 
-    public ElementCarousel mapToDomainReduced(ElementCarouselHttpRestEntity elementCarouselHttpRestEntity) {
+    public ElementCarousel mapToDomainReduced() {
         ElementCarousel elementCarousel = new ElementCarousel();
-        if (elementCarouselHttpRestEntity.getId() != null) {
-            elementCarousel.setId(elementCarouselHttpRestEntity.getId());
+        if (this.getId() != null) {
+            elementCarousel.setId(this.getId());
         }
         return elementCarousel;
     }

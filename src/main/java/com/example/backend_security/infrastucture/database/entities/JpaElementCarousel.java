@@ -91,10 +91,10 @@ public class JpaElementCarousel extends JpaElement {
         return element;
     }
 
-    public ElementCarousel mapToElementCarrousel(JpaElementCarousel jpaElementCarousel) {
+    public ElementCarousel mapToElementCarrousel() {
         ElementCarousel elementCarousel = new ElementCarousel();
-        if (jpaElementCarousel.getId() != null) {
-            elementCarousel.setId(jpaElementCarousel.getId());
+        if (this.getId() != null) {
+            elementCarousel.setId(this.getId());
         }
         return elementCarousel;
     }

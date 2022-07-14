@@ -47,7 +47,7 @@ public class JpaElementVideo extends JpaElement {
 
     public Element mapToDomain() {
         Element element = new ElementVideo(this.getId(), this.getPosition(),
-                this.getPage().mapToDomain(this.getPage()), this.type, this.codec);
+                this.getPage().mapToDomain(), this.type, this.codec);
         return element;
     }
 
@@ -60,7 +60,7 @@ public class JpaElementVideo extends JpaElement {
         return element;
     }
 
-    public JpaElement mapToJpa(Element element) {
+    public JpaElement mapToJpa() {
         JpaElement jpaElement = new JpaElementVideo(this.getId(), this.getPosition(), this.type, this.codec);
         return jpaElement;
     }

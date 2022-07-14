@@ -45,10 +45,10 @@ public class JpaElementCarouselData {
     @JoinColumn(name = "element_id")
     private JpaElementCarousel elementCarousel;
 
-    public ElementCarouselData mapToDomain(JpaElementCarouselData jpaElementCarouselData) {
-        ElementCarouselData elementCarouselData = new ElementCarouselData(jpaElementCarouselData.getId(),
-                jpaElementCarouselData.getType(), jpaElementCarouselData.getTitle(), jpaElementCarouselData
-                        .getElementCarousel().mapToElementCarrousel(jpaElementCarouselData.getElementCarousel()));
+    public ElementCarouselData mapToDomain() {
+        ElementCarouselData elementCarouselData = new ElementCarouselData(this.getId(),
+                this.getType(), this.getTitle(),
+                this.getElementCarousel().mapToElementCarrousel());
         return elementCarouselData;
     }
 

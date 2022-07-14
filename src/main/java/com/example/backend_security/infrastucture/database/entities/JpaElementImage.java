@@ -46,7 +46,7 @@ public class JpaElementImage extends JpaElement {
 
     public Element mapToDomain() {
         Element element = new ElementImage(this.getId(), this.getPosition(),
-                this.getPage().mapToDomain(this.getPage()), this.type, this.url);
+                this.getPage().mapToDomain(), this.type, this.url);
         return element;
     }
 

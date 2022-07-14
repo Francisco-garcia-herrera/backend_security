@@ -40,13 +40,13 @@ public class ElementVideo extends Element {
 
     public ElementHttpRestEntity mapToDto() {
         ElementHttpRestEntity elementHttpRestEntity = new ElementVideoHttpRestEntity(this.getId(),
-                this.getPosition(), this.getPage().mapToDto(this.getPage()), this.type, this.codec);
+                this.getPosition(), this.getPage().mapToDto(), this.type, this.codec);
         return elementHttpRestEntity;
     }
 
     public JpaElement mapToJpa() {
         JpaElement jpaElement = new JpaElementImage(this.getId(), this.getPosition(),
-                this.getPage().mapToJpa(this.getPage()), this.type, this.codec);
+                this.getPage().mapToJpa(), this.type, this.codec);
         return jpaElement;
     }
 }

@@ -20,11 +20,9 @@ public class ElementCarouselDataHttpRestEntity {
     private String title;
     private ElementCarouselHttpRestEntity elementCarousel;
 
-    public ElementCarouselData mapToDomain(ElementCarouselDataHttpRestEntity elementCarouselDataHttpRestEntity) {
-        ElementCarouselData elementCarouselData = new ElementCarouselData(elementCarouselDataHttpRestEntity.getId(),
-                elementCarouselDataHttpRestEntity.getType(), elementCarouselDataHttpRestEntity.getTitle(),
-                elementCarouselDataHttpRestEntity.getElementCarousel()
-                        .mapToDomainReduced(elementCarouselDataHttpRestEntity.getElementCarousel()));
+    public ElementCarouselData mapToDomain() {
+        ElementCarouselData elementCarouselData = new ElementCarouselData(this.getId(),
+                this.getType(), this.getTitle(), this.getElementCarousel().mapToDomainReduced());
         return elementCarouselData;
     }
 

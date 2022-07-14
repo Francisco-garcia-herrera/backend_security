@@ -61,7 +61,7 @@ public class UnitController {
         ResponseEntity<?> toReturn;
         try {
             // Long userId = getAuthUserId();
-            Unit unit = data.mapToDomain(data);
+            Unit unit = data.mapToDomain();
             createdUnit = createUnit.create(unit);
             body = domainToDtoAdapter.convertUnitReduced(createdUnit);
 

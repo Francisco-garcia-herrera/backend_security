@@ -24,16 +24,16 @@ public class PageHttpRestEntity {
 
     private List<ElementHttpRestEntity> elements;
 
-    public Page mapToDomain(PageHttpRestEntity pageHttpRestEntity) {
+    public Page mapToDomain() {
 
         List<Element> elements = new ArrayList<>();
-        if (pageHttpRestEntity.getElements() != null) {
-            for (ElementHttpRestEntity elementHttpRestEntity : pageHttpRestEntity.getElements()) {
+        if (this.getElements() != null) {
+            for (ElementHttpRestEntity elementHttpRestEntity : this.getElements()) {
                 Element element = elementHttpRestEntity.mapToDomain();
                 elements.add(element);
             }
         }
-        Page page = new Page(pageHttpRestEntity.getId(), pageHttpRestEntity.getName(), elements);
+        Page page = new Page(this.getId(), this.getName(), elements);
 
         return page;
     }

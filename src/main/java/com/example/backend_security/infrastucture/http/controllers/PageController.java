@@ -108,7 +108,7 @@ public class PageController {
         ResponseEntity<?> toReturn;
         try {
             // Long userId = getAuthUserId();
-            Page page = data.mapToDomain(data);
+            Page page = data.mapToDomain();
             createdPage = createPage.create(page);
             body = domainToDtoAdapter.convertPage(createdPage);
 
@@ -147,7 +147,7 @@ public class PageController {
         HttpStatus status = HttpStatus.CREATED;
         ResponseEntity<?> toReturn = null;
         try {
-            Page page = data.mapToDomain(data);
+            Page page = data.mapToDomain();
             savedPage = updatePage.update(page);
             body = domainToDtoAdapter.convertPage(savedPage);
         } catch (Exception e) {

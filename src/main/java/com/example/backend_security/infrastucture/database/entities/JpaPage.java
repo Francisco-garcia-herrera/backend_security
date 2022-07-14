@@ -58,13 +58,13 @@ public class JpaPage {
 
     }
 
-    public Page mapToDomain(JpaPage jpaPage) {
+    public Page mapToDomain() {
         List<Element> elements = new ArrayList<>();
-        for (JpaElement jpaElement : jpaPage.getElements()) {
+        for (JpaElement jpaElement : this.getElements()) {
             Element element = jpaElement.mapToDomainReduced();
             elements.add(element);
         }
-        Page page = new Page(jpaPage.getId(), jpaPage.getName(), elements);
+        Page page = new Page(this.getId(), this.getName(), elements);
         return page;
     }
 

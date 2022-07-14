@@ -43,15 +43,15 @@ public class JpaUnit {
     @JsonIgnoreProperties("unit")
     private List<JpaPage> pages;
 
-    public Unit mapToDomain(JpaUnit jpaUnit) {
+    public Unit mapToDomain() {
         List<Page> pages = new ArrayList<>();
-        if (jpaUnit.getPages() != null) {
-            for (JpaPage jpaPage : jpaUnit.getPages()) {
-                pages.add(jpaPage.mapToDomain(jpaPage));
+        if (this.getPages() != null) {
+            for (JpaPage jpaPage : this.getPages()) {
+                pages.add(jpaPage.mapToDomain());
             }
         }
 
-        Unit unit = new Unit(jpaUnit.getId(), jpaUnit.getName(), pages);
+        Unit unit = new Unit(this.getId(), this.getName(), pages);
         return unit;
     }
 }

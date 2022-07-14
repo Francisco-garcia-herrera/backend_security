@@ -25,12 +25,12 @@ public class Unit {
 
     private List<Page> pages;
 
-    public UnitHttpRestEntity mapToDto(Unit unit) {
+    public UnitHttpRestEntity mapToDto() {
         return UnitHttpRestEntity.builder()
                 .id(this.getId())
                 .name(this.getName())
-                .pages(unit.getPages() != null
-                        ? unit.getPages().stream().map(DomainToDtoAdapter::convert).collect(Collectors.toList())
+                .pages(this.getPages() != null
+                        ? this.getPages().stream().map(DomainToDtoAdapter::convert).collect(Collectors.toList())
                         : null)
                 .build();
     }

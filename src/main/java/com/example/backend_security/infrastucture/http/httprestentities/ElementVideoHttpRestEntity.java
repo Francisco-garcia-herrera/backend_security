@@ -33,7 +33,7 @@ public class ElementVideoHttpRestEntity extends ElementHttpRestEntity {
 
     public Element mapToDomain() {
         Element element = new ElementVideo(this.getId(), this.getPosition(),
-                this.getPage().mapToDomain(this.getPage()),
+                this.getPage().mapToDomain(),
                 this.type, this.codec);
         return element;
     }

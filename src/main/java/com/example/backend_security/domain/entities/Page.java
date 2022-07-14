@@ -28,32 +28,32 @@ public class Page {
 
     private List<Element> elements;
 
-    public PageHttpRestEntity mapToDto(Page page) {
+    public PageHttpRestEntity mapToDto() {
         return PageHttpRestEntity.builder()
                 .id(this.getId())
                 .name(this.getName())
-                .elements(page.getElements() != null
-                        ? page.getElements().stream().map(DomainToDtoAdapter::convert).collect(Collectors.toList())
+                .elements(this.getElements() != null
+                        ? this.getElements().stream().map(DomainToDtoAdapter::convert).collect(Collectors.toList())
                         : null)
                 .build();
     }
 
-    public PageHttpRestEntity mapToDtoReduced(Page page) {
+    public PageHttpRestEntity mapToDtoReduced() {
         return PageHttpRestEntity.builder()
                 .id(this.getId())
                 .name(this.getName())
                 .build();
     }
 
-    public JpaPage mapToJpa(Page page) {
+    public JpaPage mapToJpa() {
         List<JpaElement> jpaElements = new ArrayList<>();
-        if (page.getElements() != null) {
-            for (Element element : page.getElements()) {
+        if (this.getElements() != null) {
+            for (Element element : this.getElements()) {
                 JpaElement jpaElement = element.mapToJpa();
                 jpaElements.add(jpaElement);
             }
         }
-        JpaPage jpaPage = new JpaPage(page.getId(), page.getName(), jpaElements);
+        JpaPage jpaPage = new JpaPage(this.getId(), this.getName(), jpaElements);
         return jpaPage;
     }
 
