@@ -29,7 +29,7 @@ public class PageHttpRestEntity {
         List<Element> elements = new ArrayList<>();
         if (pageHttpRestEntity.getElements() != null) {
             for (ElementHttpRestEntity elementHttpRestEntity : pageHttpRestEntity.getElements()) {
-                Element element = elementHttpRestEntity.mapToDomain(elementHttpRestEntity);
+                Element element = elementHttpRestEntity.mapToDomain();
                 elements.add(element);
             }
         }

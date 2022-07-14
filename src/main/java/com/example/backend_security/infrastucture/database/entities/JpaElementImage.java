@@ -44,17 +44,17 @@ public class JpaElementImage extends JpaElement {
         this.url = url;
     }
 
-    public Element mapToDomain(JpaElement jpaElement) {
-        Element element = new ElementImage(jpaElement.getId(), this.getPosition(),
+    public Element mapToDomain() {
+        Element element = new ElementImage(this.getId(), this.getPosition(),
                 this.getPage().mapToDomain(this.getPage()), this.type, this.url);
         return element;
     }
 
-    public Element mapToDomainReduced(JpaElement jpaElement) {
+    public Element mapToDomainReduced() {
         Page page = new Page();
-        page.setId(jpaElement.getPage().getId());
+        page.setId(this.getPage().getId());
 
-        Element element = new ElementImage(jpaElement.getId(), this.getPosition(),
+        Element element = new ElementImage(this.getId(), this.getPosition(),
                 page, this.type, this.url);
         return element;
     }

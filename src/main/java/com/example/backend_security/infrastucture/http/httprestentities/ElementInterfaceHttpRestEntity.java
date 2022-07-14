@@ -4,5 +4,5 @@ import com.example.backend_security.domain.entities.Element;
 
 public interface ElementInterfaceHttpRestEntity {
 
-    public Element mapToDomain(ElementHttpRestEntity elementHttpRestEntity);
+    public Element mapToDomain();
 }

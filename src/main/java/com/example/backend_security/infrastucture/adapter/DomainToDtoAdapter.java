@@ -18,7 +18,7 @@ import com.example.backend_security.infrastucture.http.httprestentities.UnitHttp
 public class DomainToDtoAdapter {
 
     public static ElementHttpRestEntity convert(Element object) {
-        return object.mapToDto(object);
+        return object.mapToDto();
     }
 
     public static List<ElementHttpRestEntity> convert(List<Element> objects) {

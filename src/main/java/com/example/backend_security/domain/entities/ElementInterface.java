@@ -6,7 +6,7 @@ import com.example.backend_security.infrastucture.http.httprestentities.ElementH
 public interface ElementInterface {
     String render();
 
-    ElementHttpRestEntity mapToDto(Element element);
+    ElementHttpRestEntity mapToDto();
 
-    JpaElement mapToJpa(Element element);
+    JpaElement mapToJpa();
 }

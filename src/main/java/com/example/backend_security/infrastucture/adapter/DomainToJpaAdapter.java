@@ -22,14 +22,14 @@ public class DomainToJpaAdapter {
 
     public JpaElement convert(Element object) {
         logger.info("Conver Element to JpaElement");
-        return object.mapToJpa(object);
+        return object.mapToJpa();
     }
 
     public JpaPage convert(Page object) {
         List<JpaElement> jpaElements = new ArrayList<>();
         if (object.getElements() != null) {
             for (Element element : object.getElements()) {
-                JpaElement jpaElement = element.mapToJpa(element);
+                JpaElement jpaElement = element.mapToJpa();
                 jpaElements.add(jpaElement);
             }
         }
@@ -44,12 +44,12 @@ public class DomainToJpaAdapter {
         return jpaElementCarouselData;
     }
 
-    public JpaUnit convert(Unit unit){
+    public JpaUnit convert(Unit unit) {
         List<JpaPage> jpaPages = new ArrayList<>();
         List<JpaElement> jpaElements = new ArrayList<>();
 
-        if(unit.getPages() != null){
-            for(Page page : unit.getPages()){
+        if (unit.getPages() != null) {
+            for (Page page : unit.getPages()) {
                 JpaPage jpaPage = new JpaPage();
                 jpaPage.setId(page.getId());
                 jpaPage.setName(page.getName());
@@ -57,10 +57,10 @@ public class DomainToJpaAdapter {
                 JpaUnit jpaUnit = new JpaUnit();
                 jpaUnit.setId(unit.getId());
                 jpaPage.setUnit(jpaUnit);
-                
+
                 if (page.getElements() != null) {
                     for (Element element : page.getElements()) {
-                        JpaElement jpaElement = element.mapToJpa(element);
+                        JpaElement jpaElement = element.mapToJpa();
                         jpaElements.add(jpaElement);
                     }
                 }

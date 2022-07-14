@@ -31,9 +31,9 @@ public class ElementVideoHttpRestEntity extends ElementHttpRestEntity {
         this.codec = codec;
     }
 
-    public Element mapToDomain(ElementHttpRestEntity elementHttpRestEntity) {
-        Element element = new ElementVideo(elementHttpRestEntity.getId(), elementHttpRestEntity.getPosition(),
-                elementHttpRestEntity.getPage().mapToDomain(elementHttpRestEntity.getPage()),
+    public Element mapToDomain() {
+        Element element = new ElementVideo(this.getId(), this.getPosition(),
+                this.getPage().mapToDomain(this.getPage()),
                 this.type, this.codec);
         return element;
     }

@@ -47,7 +47,7 @@ public class ElementCarouselHttpRestEntity extends ElementHttpRestEntity {
         this.elementCarouselDatas = elementCarouselDatas;
     }
 
-    public Element mapToDomain(ElementHttpRestEntity elementHttpRestEntity) {
+    public Element mapToDomain() {
         List<ElementCarouselData> elementCarouselDatas = new ArrayList<>();
         if (this.getElementCarouselDatas() != null) {
 
@@ -67,8 +67,8 @@ public class ElementCarouselHttpRestEntity extends ElementHttpRestEntity {
             }
         }
 
-        Element element = new ElementCarousel(elementHttpRestEntity.getId(), elementHttpRestEntity.getPosition(),
-                elementHttpRestEntity.getPage().mapToDomain(elementHttpRestEntity.getPage()),
+        Element element = new ElementCarousel(this.getId(), this.getPosition(),
+                this.getPage().mapToDomain(this.getPage()),
                 this.type, this.title, elementCarouselDatas);
         return element;
     }

@@ -45,17 +45,17 @@ public class JpaElementVideo extends JpaElement {
         this.codec = codec;
     }
 
-    public Element mapToDomain(JpaElement jpaElement) {
-        Element element = new ElementVideo(jpaElement.getId(), jpaElement.getPosition(),
+    public Element mapToDomain() {
+        Element element = new ElementVideo(this.getId(), this.getPosition(),
                 this.getPage().mapToDomain(this.getPage()), this.type, this.codec);
         return element;
     }
 
-    public Element mapToDomainReduced(JpaElement jpaElement) {
+    public Element mapToDomainReduced() {
         Page page = new Page();
-        page.setId(jpaElement.getPage().getId());
+        page.setId(this.getPage().getId());
 
-        Element element = new ElementVideo(jpaElement.getId(), this.getPosition(),
+        Element element = new ElementVideo(this.getId(), this.getPosition(),
                 page, this.type, this.codec);
         return element;
     }

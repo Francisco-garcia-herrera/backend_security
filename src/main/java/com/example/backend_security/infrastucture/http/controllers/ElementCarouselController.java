@@ -43,7 +43,7 @@ public class ElementCarouselController {
         ResponseEntity<?> toReturn;
         try {
             // Long userId = getAuthUserId();
-            Element element = data.mapToDomain(data);
+            Element element = data.mapToDomain();
             createdElement = createElementCarousel.create(element);
             body = domainToDtoAdapter.convert(createdElement);
 
@@ -65,7 +65,7 @@ public class ElementCarouselController {
         HttpStatus status = HttpStatus.CREATED;
         ResponseEntity<?> toReturn = null;
         try {
-            Element element = data.mapToDomain(data);
+            Element element = data.mapToDomain();
             savedElement = updateElementCarousel.update(element);
             body = domainToDtoAdapter.convert(savedElement);
         } catch (Exception e) {

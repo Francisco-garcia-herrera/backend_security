@@ -60,7 +60,7 @@ public class JpaToDomainAdapter {
 
     public Element convert(JpaElement object) {
         logger.info("Convert JpaElement to DomainElement");
-        return object.mapToDomainReduced(object);
+        return object.mapToDomainReduced();
     }
 
     public Page convert(JpaPage object) {

@@ -47,7 +47,7 @@ public class ElementCarousel extends Element {
         return "Elemento Carousel: " + this.getPosition() + ". Title: " + this.title;
     }
 
-    public ElementHttpRestEntity mapToDto(Element element) {
+    public ElementHttpRestEntity mapToDto() {
 
         List<ElementCarouselDataHttpRestEntity> elementCarouselDatas = new ArrayList<>();
         if (this.elementCarouselDatas != null) {
@@ -66,7 +66,7 @@ public class ElementCarousel extends Element {
         return elementHttpRestEntity;
     }
 
-    public JpaElement mapToJpa(Element element) {
+    public JpaElement mapToJpa() {
 
         List<JpaElementCarouselData> jpaElementCarouselDatas = new ArrayList<>();
         if (this.getElementCarouselDatas() != null) {

@@ -61,13 +61,13 @@ public class JpaElementCarousel extends JpaElement {
         this.elementCarouselDatas = elementCarouselDatas;
     }
 
-    public Element mapToDomain(JpaElement jpaElement) {
+    public Element mapToDomain() {
         return null;
     }
 
-    public Element mapToDomainReduced(JpaElement jpaElement) {
+    public Element mapToDomainReduced() {
         Page page = new Page();
-        page.setId(jpaElement.getPage().getId());
+        page.setId(this.getPage().getId());
 
         List<ElementCarouselData> elementCarouselDatas = new ArrayList<>();
         if (this.elementCarouselDatas != null) {

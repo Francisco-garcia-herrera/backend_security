@@ -38,13 +38,13 @@ public class ElementVideo extends Element {
         return "Elemento Video: " + this.getPosition() + ". Codec: " + this.codec;
     }
 
-    public ElementHttpRestEntity mapToDto(Element element) {
-        ElementHttpRestEntity elementHttpRestEntity = new ElementVideoHttpRestEntity(element.getId(),
+    public ElementHttpRestEntity mapToDto() {
+        ElementHttpRestEntity elementHttpRestEntity = new ElementVideoHttpRestEntity(this.getId(),
                 this.getPosition(), this.getPage().mapToDto(this.getPage()), this.type, this.codec);
         return elementHttpRestEntity;
     }
 
-    public JpaElement mapToJpa(Element element) {
+    public JpaElement mapToJpa() {
         JpaElement jpaElement = new JpaElementImage(this.getId(), this.getPosition(),
                 this.getPage().mapToJpa(this.getPage()), this.type, this.codec);
         return jpaElement;

@@ -49,7 +49,7 @@ public class Page {
         List<JpaElement> jpaElements = new ArrayList<>();
         if (page.getElements() != null) {
             for (Element element : page.getElements()) {
-                JpaElement jpaElement = element.mapToJpa(element);
+                JpaElement jpaElement = element.mapToJpa();
                 jpaElements.add(jpaElement);
             }
         }

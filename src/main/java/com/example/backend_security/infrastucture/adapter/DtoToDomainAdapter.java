@@ -16,7 +16,7 @@ public class DtoToDomainAdapter {
 
     public Element convert(ElementHttpRestEntity object) {
         logger.info("Conver Element HttpRest to Element Domain");
-        return object.mapToDomain(object);
+        return object.mapToDomain();
     }
 
     public List<Element> convert(List<ElementHttpRestEntity> objects) {

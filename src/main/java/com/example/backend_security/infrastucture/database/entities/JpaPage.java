@@ -61,7 +61,7 @@ public class JpaPage {
     public Page mapToDomain(JpaPage jpaPage) {
         List<Element> elements = new ArrayList<>();
         for (JpaElement jpaElement : jpaPage.getElements()) {
-            Element element = jpaElement.mapToDomainReduced(jpaElement);
+            Element element = jpaElement.mapToDomainReduced();
             elements.add(element);
         }
         Page page = new Page(jpaPage.getId(), jpaPage.getName(), elements);

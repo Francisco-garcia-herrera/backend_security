@@ -43,7 +43,7 @@ public class ElementImageController {
         ResponseEntity<?> toReturn;
         try {
             // Long userId = getAuthUserId();
-            Element element = data.mapToDomain(data);
+            Element element = data.mapToDomain();
             createdElement = createElement.create(element);
             body = domainToDtoAdapter.convert(createdElement);
 
@@ -65,7 +65,7 @@ public class ElementImageController {
         HttpStatus status = HttpStatus.CREATED;
         ResponseEntity<?> toReturn = null;
         try {
-            Element element = data.mapToDomain(data);
+            Element element = data.mapToDomain();
             savedElement = updateElementImage.update(element);
             body = domainToDtoAdapter.convert(savedElement);
         } catch (Exception e) {

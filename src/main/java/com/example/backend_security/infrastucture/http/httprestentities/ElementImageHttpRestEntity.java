@@ -37,9 +37,9 @@ public class ElementImageHttpRestEntity extends ElementHttpRestEntity {
         this.url = url;
     }
 
-    public Element mapToDomain(ElementHttpRestEntity elementHttpRestEntity) {
-        Element element = new ElementImage(elementHttpRestEntity.getId(), elementHttpRestEntity.getPosition(),
-                elementHttpRestEntity.getPage().mapToDomain(elementHttpRestEntity.getPage()),
+    public Element mapToDomain() {
+        Element element = new ElementImage(this.getId(), this.getPosition(),
+                this.getPage().mapToDomain(this.getPage()),
                 this.type, this.url);
         return element;
     }

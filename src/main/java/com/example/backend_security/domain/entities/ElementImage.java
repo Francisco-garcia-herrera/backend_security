@@ -37,13 +37,13 @@ public class ElementImage extends Element {
         return "Elemento Imagen: " + this.getPosition() + ". Url: " + this.url;
     }
 
-    public ElementHttpRestEntity mapToDto(Element element) {
-        ElementHttpRestEntity elementHttpRestEntity = new ElementImageHttpRestEntity(element.getId(),
+    public ElementHttpRestEntity mapToDto() {
+        ElementHttpRestEntity elementHttpRestEntity = new ElementImageHttpRestEntity(this.getId(),
                 this.getPosition(), this.getPage().mapToDto(this.getPage()), this.type, this.url);
         return elementHttpRestEntity;
     }
 
-    public JpaElement mapToJpa(Element element) {
+    public JpaElement mapToJpa() {
         JpaElement jpaElement = new JpaElementImage(this.getId(), this.getPosition(),
                 this.getPage().mapToJpa(this.getPage()), this.type, this.url);
         return jpaElement;
