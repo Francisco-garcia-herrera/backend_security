@@ -29,8 +29,6 @@ public class ElementCarouselController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private DomainToDtoAdapter domainToDtoAdapter;
-    @Autowired
     private CreateElementCarousel createElementCarousel;
     @Autowired
     private UpdateElementCarousel updateElementCarousel;
@@ -45,7 +43,7 @@ public class ElementCarouselController {
             // Long userId = getAuthUserId();
             Element element = data.mapToDomain();
             createdElement = createElementCarousel.create(element);
-            body = domainToDtoAdapter.convert(createdElement);
+            body = DomainToDtoAdapter.convert(createdElement);
 
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -67,7 +65,7 @@ public class ElementCarouselController {
         try {
             Element element = data.mapToDomain();
             savedElement = updateElementCarousel.update(element);
-            body = domainToDtoAdapter.convert(savedElement);
+            body = DomainToDtoAdapter.convert(savedElement);
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
             logger.error("Generic uncontrolled ERROR", e);

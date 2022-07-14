@@ -38,8 +38,6 @@ public class ElementController {
     @Autowired
     private GetElement getElement;
     @Autowired
-    private DomainToDtoAdapter domainToDtoAdapter;
-    @Autowired
     private DeleteElement deleteElement;
     @Autowired
     private JpaElementQueries jpaElementQueries;
@@ -52,7 +50,7 @@ public class ElementController {
         List<Element> elementsDomain = new ArrayList<>();
 
         elementsDomain = getAllElements.get();
-        body = domainToDtoAdapter.convert(elementsDomain);
+        body = DomainToDtoAdapter.convert(elementsDomain);
 
         toReturn = new ResponseEntity<>(body, status);
         return toReturn;
@@ -66,7 +64,7 @@ public class ElementController {
         Element elementDomain = null;
 
         elementDomain = getElement.get(id);
-        body = domainToDtoAdapter.convert(elementDomain);
+        body = DomainToDtoAdapter.convert(elementDomain);
 
         toReturn = new ResponseEntity<>(body, status);
         return toReturn;

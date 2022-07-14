@@ -29,8 +29,6 @@ public class ElementImageController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private DomainToDtoAdapter domainToDtoAdapter;
-    @Autowired
     private CreateElementImage createElement;
     @Autowired
     private UpdateElementImage updateElementImage;
@@ -45,7 +43,7 @@ public class ElementImageController {
             // Long userId = getAuthUserId();
             Element element = data.mapToDomain();
             createdElement = createElement.create(element);
-            body = domainToDtoAdapter.convert(createdElement);
+            body = DomainToDtoAdapter.convert(createdElement);
 
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -67,7 +65,7 @@ public class ElementImageController {
         try {
             Element element = data.mapToDomain();
             savedElement = updateElementImage.update(element);
-            body = domainToDtoAdapter.convert(savedElement);
+            body = DomainToDtoAdapter.convert(savedElement);
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
             logger.error("Generic uncontrolled ERROR", e);
