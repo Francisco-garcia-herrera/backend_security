@@ -210,3 +210,16 @@ async function addUnit(){
     resetElementList();
     getAllUnits();
 }
+
+
+async function deleteUnit(id){
+    try {
+    const response = await axios.delete(`${BASE_URL}/units/`+id);
+    console.log(response);
+    } catch (errors) {
+    console.error(errors);
+    }
+    resetPageList();
+    resetElementList();
+    getAllUnits();
+}

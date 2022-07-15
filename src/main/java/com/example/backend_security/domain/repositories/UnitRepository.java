@@ -9,4 +9,6 @@ public interface UnitRepository {
     List<Unit> getAll();
 
     Unit save(Unit unit);
+
+    void delete(Long id);
 }

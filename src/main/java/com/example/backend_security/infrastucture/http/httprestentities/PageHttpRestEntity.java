@@ -35,7 +35,7 @@ public class PageHttpRestEntity {
                 elements.add(element);
             }
         }
-        Page page = new Page(this.getId(), this.getName(), elements, this.getUnit().mapToDomain());
+        Page page = new Page(this.getId(), this.getName(), elements, this.getUnit() != null ? this.getUnit().mapToDomain(): null);
 
         return page;
     }

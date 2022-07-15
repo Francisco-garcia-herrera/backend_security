@@ -49,4 +49,16 @@ public class JpaUnitRepository implements UnitRepository {
         return jpaToDomainAdapter.convert(saved);
     }
 
+    @Override
+    public void delete(Long id) {
+        if (id == null)
+            return;
+        try {
+            this.jpaUnitQueries.deleteById(id);
+        } catch (Exception e) {
+            /* throw new T2cDataBaseException("Error deleting md ict element, " + e); */
+            System.out.println("Exception delete JpaUnitRepository " + e);
+        }
+    }
+
 }

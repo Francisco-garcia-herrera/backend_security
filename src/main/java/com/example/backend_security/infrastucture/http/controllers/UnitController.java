@@ -7,7 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend_security.domain.entities.Unit;
 import com.example.backend_security.domain.usecases.unit.CreateUnit;
+import com.example.backend_security.domain.usecases.unit.DeleteUnit;
 import com.example.backend_security.domain.usecases.unit.GetAllUnits;
 import com.example.backend_security.infrastucture.adapter.DomainToDtoAdapter;
 import com.example.backend_security.infrastucture.http.httprestentities.UnitHttpRestEntity;
@@ -35,6 +38,9 @@ public class UnitController {
 
     @Autowired
     private CreateUnit createUnit;
+
+    @Autowired
+    private DeleteUnit deleteUnit;
 
     @Autowired
     private DomainToDtoAdapter domainToDtoAdapter;
@@ -71,6 +77,23 @@ public class UnitController {
             return new ResponseEntity<>(e.getMessage(), status);
         } finally {
             toReturn = new ResponseEntity<>(body, status);
+            logger.debug(". Status<" + status + ">");
+        }
+        return toReturn;
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        HttpStatus status = HttpStatus.OK;
+        ResponseEntity<?> toReturn;
+        try {
+            deleteUnit.delete(id);
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            logger.error("Generic uncontrolled ERROR", e);
+            return new ResponseEntity<>(e.getMessage(), status);
+        } finally {
+            toReturn = new ResponseEntity<>("Unit succesfully deleted", status);
             logger.debug(". Status<" + status + ">");
         }
         return toReturn;
