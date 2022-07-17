@@ -15,6 +15,7 @@ import com.example.backend_security.infrastucture.database.entities.JpaElement;
 import com.example.backend_security.infrastucture.database.entities.JpaElementCarouselData;
 import com.example.backend_security.infrastucture.database.entities.JpaPage;
 import com.example.backend_security.infrastucture.database.entities.JpaUnit;
+import com.example.backend_security.infrastucture.database.entities.JpaPage.JpaPageType;
 
 @Component
 public class DomainToJpaAdapter {
@@ -34,7 +35,9 @@ public class DomainToJpaAdapter {
             }
         }
 
-        JpaPage jpaPage = new JpaPage(object.getId(), object.getName(), jpaElements, object.getUnit().mapToJpa());
+        JpaPage jpaPage = new JpaPage(object.getId(), object.getName(), JpaPageType.valueOf(object.getType()),
+                jpaElements,
+                object.getUnit().mapToJpa());
         return jpaPage;
     }
 

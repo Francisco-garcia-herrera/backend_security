@@ -77,10 +77,10 @@ public class HelloController {
         List<JpaElement> elements = new ArrayList<>();
         JpaPage jpaPage = new JpaPage();
         jpaPage.setId(1L);
-        elements.add(new JpaElementImage(1, jpaPage, "IMAGE", "URL IMAGE"));
-        elements.add(new JpaElementVideo(2, jpaPage, "VIDEO", "H264"));
-        elements.add(new JpaElementImage(3, jpaPage, "IMAGE", "URL IMAGE 2"));
-        elements.add(new JpaElementVideo(4, jpaPage, "VIDEO", "H264 2"));
+        elements.add(new JpaElementImage(1, jpaPage, JpaElement.JpaElementType.valueOf("IMAGE"), "URL IMAGE"));
+        elements.add(new JpaElementVideo(2, jpaPage, JpaElement.JpaElementType.valueOf("VIDEO"), "H264"));
+        elements.add(new JpaElementImage(3, jpaPage, JpaElement.JpaElementType.valueOf("IMAGE"), "URL IMAGE 2"));
+        elements.add(new JpaElementVideo(4, jpaPage, JpaElement.JpaElementType.valueOf("VIDEO"), "H264 2"));
         for (JpaElement jpaElement : elements) {
             jpaElementQueries.saveAndFlush(jpaElement);
         }

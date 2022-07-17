@@ -52,4 +52,10 @@ public abstract class JpaElement implements JpaElementInterface {
         this.position = position;
     }
 
+    public enum JpaElementType {
+        IMAGE,
+        VIDEO,
+        CAROUSEL
+    }
+
 }

@@ -70,6 +70,7 @@ public class JpaToDomainAdapter {
                 .name(object.getName())
                 .elements(convert(object.getElements()))
                 .unit(object.getUnit().mapToDomainReduced())
+                .type(object.getType().toString())
                 .build();
     }
 
@@ -78,6 +79,7 @@ public class JpaToDomainAdapter {
         return Page.builder()
                 .id(object.getId())
                 .name(object.getName())
+                .type(object.getType().toString())
                 .build();
     }
 

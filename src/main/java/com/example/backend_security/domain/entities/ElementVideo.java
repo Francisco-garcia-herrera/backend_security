@@ -46,7 +46,7 @@ public class ElementVideo extends Element {
 
     public JpaElement mapToJpa() {
         JpaElement jpaElement = new JpaElementImage(this.getId(), this.getPosition(),
-                this.getPage().mapToJpa(), this.type, this.codec);
+                this.getPage().mapToJpa(), JpaElement.JpaElementType.valueOf(this.type), this.codec);
         return jpaElement;
     }
 }

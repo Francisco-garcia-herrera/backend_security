@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,6 +44,9 @@ public class JpaPage {
 
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    private JpaPageType type;
+
     @OneToMany(orphanRemoval = true, cascade = CascadeType.PERSIST, mappedBy = "page")
     @JsonIgnoreProperties("page")
     private List<JpaElement> elements;
@@ -51,11 +56,11 @@ public class JpaPage {
     @JsonIgnoreProperties("elements")
     private JpaUnit unit;
 
-    public JpaPage(Long id, String name, List<JpaElement> jpaElements) {
+    public JpaPage(Long id, String name, JpaPageType type, List<JpaElement> jpaElements) {
         this.id = id;
         this.name = name;
+        this.type = type;
         this.elements = jpaElements;
-
     }
 
     public Page mapToDomain() {
@@ -64,8 +69,16 @@ public class JpaPage {
             Element element = jpaElement.mapToDomainReduced();
             elements.add(element);
         }
-        Page page = new Page(this.getId(), this.getName(), elements, this.getUnit().mapToDomainReduced());
+        Page page = new Page(this.getId(), this.getName(), elements, this.getUnit().mapToDomainReduced(),
+                this.getType().toString());
         return page;
+    }
+
+    public enum JpaPageType {
+        INDEX,
+        TOPIC,
+        SUBTOPIC,
+        SUMMARY
     }
 
 }

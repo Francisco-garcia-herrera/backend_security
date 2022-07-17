@@ -45,7 +45,7 @@ public class ElementImage extends Element {
 
     public JpaElement mapToJpa() {
         JpaElement jpaElement = new JpaElementImage(this.getId(), this.getPosition(),
-                this.getPage().mapToJpa(), this.type, this.url);
+                this.getPage().mapToJpa(), JpaElement.JpaElementType.valueOf(this.type), this.url);
         return jpaElement;
     }
 }

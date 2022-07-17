@@ -2,6 +2,8 @@ package com.example.backend_security.infrastucture.database.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -28,17 +30,18 @@ import lombok.Setter;
 @PrimaryKeyJoinColumn(name = "element_id")
 public class JpaElementImage extends JpaElement {
 
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private JpaElementType type;
 
     private String url;
 
-    public JpaElementImage(Integer position, JpaPage jpaPage, String type, String url) {
+    public JpaElementImage(Integer position, JpaPage jpaPage, JpaElementType type, String url) {
         super(position, jpaPage);
         this.type = type;
         this.url = url;
     }
 
-    public JpaElementImage(Long id, Integer position, JpaPage jpaPage, String type, String url) {
+    public JpaElementImage(Long id, Integer position, JpaPage jpaPage, JpaElementType type, String url) {
         super(id, position, jpaPage);
         this.type = type;
         this.url = url;
@@ -46,7 +49,7 @@ public class JpaElementImage extends JpaElement {
 
     public Element mapToDomain() {
         Element element = new ElementImage(this.getId(), this.getPosition(),
-                this.getPage().mapToDomain(), this.type, this.url);
+                this.getPage().mapToDomain(), this.type.toString(), this.url);
         return element;
     }
 
@@ -55,7 +58,7 @@ public class JpaElementImage extends JpaElement {
         page.setId(this.getPage().getId());
 
         Element element = new ElementImage(this.getId(), this.getPosition(),
-                page, this.type, this.url);
+                page, this.type.toString(), this.url);
         return element;
     }
 

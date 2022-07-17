@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import com.example.backend_security.infrastucture.adapter.DomainToDtoAdapter;
 import com.example.backend_security.infrastucture.database.entities.JpaElement;
 import com.example.backend_security.infrastucture.database.entities.JpaPage;
+import com.example.backend_security.infrastucture.database.entities.JpaPage.JpaPageType;
 import com.example.backend_security.infrastucture.http.httprestentities.PageHttpRestEntity;
 
 import lombok.AllArgsConstructor;
@@ -30,6 +31,8 @@ public class Page {
 
     private Unit unit;
 
+    private String type;
+
     public PageHttpRestEntity mapToDto() {
         return PageHttpRestEntity.builder()
                 .id(this.getId())
@@ -38,6 +41,7 @@ public class Page {
                         ? this.getElements().stream().map(DomainToDtoAdapter::convert).collect(Collectors.toList())
                         : null)
                 .unit(this.getUnit().mapToDtoReduced())
+                .type(this.type)
                 .build();
     }
 
@@ -46,6 +50,7 @@ public class Page {
                 .id(this.getId())
                 .name(this.getName() != null ? this.getName() : null)
                 .unit(this.getUnit() != null ? this.getUnit().mapToDtoReduced() : null)
+                .type(this.type)
                 .build();
     }
 
@@ -57,7 +62,7 @@ public class Page {
                 jpaElements.add(jpaElement);
             }
         }
-        JpaPage jpaPage = new JpaPage(this.getId(), this.getName(), jpaElements);
+        JpaPage jpaPage = new JpaPage(this.getId(), this.getName(), JpaPageType.valueOf(this.getType()), jpaElements);
         return jpaPage;
     }
 

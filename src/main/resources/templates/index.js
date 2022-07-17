@@ -37,10 +37,11 @@ async function getAllPagesByUnitId(unitId){
     try {
     const response = await axios.get(`${BASE_URL}/pages/get-all-by-unit/`+ unitId);
     response.data.forEach(page => {
-        htmlResponse += "<li class='list-group-item'><a onclick='getPage("+page.id+")'>"+page.name+"</a> | <a onclick='deletePage("+page.id+")'><i class='bi bi-x-circle'></i></a></li>";
+        htmlResponse += "<li class='list-group-item'><div class='d-flex justify-content-between'><a onclick='getPage("+page.id+")'>"+page.name+"</a> "+page.type+" <a onclick='deletePage("+page.id+")'><i class='bi bi-x-circle'></i></a></div></li>";
     });
     htmlResponse += "</ul>";
     document.getElementById("pagesList").innerHTML = htmlResponse;
+    resetElementList();
     return response.data;
     } catch (errors) {
     console.error(errors);
@@ -59,15 +60,15 @@ async function getPage(id){
     response.data.elements.forEach(element => {
         
         if(element.elementCarouselDatas){
-            htmlResponse += "<li class='list-group-item'>"+element.type+" position: "+element.position+" | <a onclick='deleteElement("+element.id+")'><i class='bi bi-x-circle'></i></a> - <a onclick='addElementCarouselData("+element.id+")'><i class='bi bi-plus-circle'></i></a>";
+            htmlResponse += "<li class='list-group-item'><div class='d-flex justify-content-between'><div>"+element.type+"</div> <div class='d-flex justify-content-between'><div>position: "+element.position+"</div> <a onclick='addElementCarouselData("+element.id+")'><i class='bi bi-plus-circle'></i></a> <a onclick='deleteElement("+element.id+")'><i class='bi bi-x-circle'></i></a></div></div>";
             htmlResponse += "<ul>";
             element.elementCarouselDatas.forEach(data => {
-                htmlResponse += "<li class='list-group-item'>"+data.type+"| <a onclick='deleteElementCarouselData("+data.id+")'><i class='bi bi-x-circle'></i></a></li>";
+                htmlResponse += "<li class='list-group-item'><div class='d-flex justify-content-between'><div>"+data.type+"</div> <div><a onclick='deleteElementCarouselData("+data.id+")'><i class='bi bi-x-circle'></i></a></div></div></li>";
             })
             htmlResponse += "</li>";
             htmlResponse += "</ul>";
         }else{
-            htmlResponse += "<li class='list-group-item'>"+element.type+" position: "+element.position+" | <a onclick='deleteElement("+element.id+")'><i class='bi bi-x-circle'></i></a></li>";
+            htmlResponse += "<li class='list-group-item'><div class='d-flex justify-content-between'><div>"+element.type+"</div> <div class='d-flex justify-content-between'><div>position: "+element.position+"</div> <div><a onclick='deleteElement("+element.id+")'><i class='bi bi-x-circle'></i></a></div></div></div></li>";
         }
     });
     htmlResponse += "</ul>";
@@ -85,7 +86,8 @@ async function addPage(){
         "name": "New Page",
         "unit": {
             "id": unitSelected
-        }
+        },
+        "type": "TOPIC"
     };
     const response = await axios.post(`${BASE_URL}/pages`,page);
     console.log(response);
@@ -102,7 +104,20 @@ async function deletePage(id){
     } catch (errors) {
     console.error(errors);
     }
+    resetElementList();
     getAllPages();
+    
+}
+
+
+function AddElement(){
+    let elementOption = document.getElementById("addElementSelector").value;
+    if(elementOption == 'ElementImage'){
+        addElementImage();
+    }
+    if(elementOption == 'ElementCarousel'){
+        addElementCarousel();
+    }
 }
 
 
@@ -186,7 +201,7 @@ async function getAllUnits(){
     try {
     const response = await axios.get(`${BASE_URL}/units/get-all`);
     response.data.forEach(unit => {
-        htmlResponse += "<li class='list-group-item'><a onclick='getAllPagesByUnitId("+unit.id+")'>"+unit.name+"</a> | <a onclick='deleteUnit("+unit.id+")'><i class='bi bi-x-circle'></i></a></li>";
+        htmlResponse += "<li class='list-group-item'><div class='d-flex justify-content-between'><a onclick='getAllPagesByUnitId("+unit.id+")'>"+unit.name+"</a> <a onclick='deleteUnit("+unit.id+")'><i class='bi bi-x-circle'></i></a></div></li>";
     });
     htmlResponse += "</ul>";
     document.getElementById("unitList").innerHTML = htmlResponse;
