@@ -56,6 +56,10 @@ public class JpaPage {
     @JsonIgnoreProperties("elements")
     private JpaUnit unit;
 
+    public JpaPage(Long id) {
+        this.id = id;
+    }
+
     public JpaPage(Long id, String name, JpaPageType type, List<JpaElement> jpaElements) {
         this.id = id;
         this.name = name;

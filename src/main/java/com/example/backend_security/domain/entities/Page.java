@@ -62,7 +62,8 @@ public class Page {
                 jpaElements.add(jpaElement);
             }
         }
-        JpaPage jpaPage = new JpaPage(this.getId(), this.getName(), JpaPageType.valueOf(this.getType()), jpaElements);
+        JpaPage jpaPage = new JpaPage(this.getId(), this.getName() != null ? this.getName() : null,
+                this.getType() != null ? JpaPageType.valueOf(this.getType()) : null, jpaElements);
         return jpaPage;
     }
 

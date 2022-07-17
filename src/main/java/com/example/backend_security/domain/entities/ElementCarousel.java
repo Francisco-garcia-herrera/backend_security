@@ -44,7 +44,26 @@ public class ElementCarousel extends Element {
     }
 
     public String render() {
-        return "<div id='carouselExampleSlidesOnly' class='carousel slide' data-bs-ride='carousel'><div class='carousel-inner'><div class='carousel-item active'><span>1</span></div><div class='carousel-item'><span>2</span></div></div></div>";
+
+        String carouselDatasText = "";
+        int index = 0;
+        for (ElementCarouselData elementCarouselData : this.getElementCarouselDatas()) {
+            if (index == 0) {
+                carouselDatasText += "<div class='carousel-item active'><img src='" + elementCarouselData.getTitle()
+                        + "' class='d-block w-50' alt='...'></div>";
+            }
+            carouselDatasText += "<div class='carousel-item'><img src='" + elementCarouselData.getTitle()
+                    + "' class='d-block w-50' alt='...'></div>";
+            index++;
+        }
+
+        return "<div id='carousel" + this.getId().toString()
+                + "' class='carousel slide' data-bs-ride='carousel'><div class='carousel-inner'>" + carouselDatasText
+                + "</div><button class='carousel-control-prev' type='button' data-bs-target='#carousel"
+                + this.getId().toString()
+                + "' data-bs-slide='prev'><span class='carousel-control-prev-icon' aria-hidden='true'></span><span class='visually-hidden'>Previous</span></button><button class='carousel-control-next' type='button' data-bs-target='#carousel"
+                + this.getId().toString()
+                + "' data-bs-slide='next'><span class='carousel-control-next-icon' aria-hidden='true'></span><span class='visually-hidden'>Next</span></button></div>";
     }
 
     public ElementHttpRestEntity mapToDto() {
