@@ -55,7 +55,8 @@ public abstract class JpaElement implements JpaElementInterface {
     public enum JpaElementType {
         IMAGE,
         VIDEO,
-        CAROUSEL
+        CAROUSEL,
+        PARAGRAPH
     }
 
 }

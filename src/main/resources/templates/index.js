@@ -120,6 +120,9 @@ function AddElement(){
     if(elementOption == 'ElementCarousel'){
         addElementCarousel();
     }
+    if(elementOption == 'ElementParagraph'){
+        addElementParagraph();
+    }
 }
 
 
@@ -169,6 +172,25 @@ async function addElementCarouselData(elementCarouselId){
         } 
     };
     const response = await axios.post(`${BASE_URL}/elements/carousel-data`,element);
+    console.log(response);
+    } catch (errors) {
+    console.error(errors);
+    }
+    getPage(pageSelected);
+}
+
+
+async function addElementParagraph(){
+    try {
+    const element = {
+        "position": 300,
+        "page": {
+            "id": pageSelected
+        },
+        "type": "PARAGRAPH",
+        "content" : "Lorem Ipsum..."
+    };
+    const response = await axios.post(`${BASE_URL}/elements/paragraph`,element);
     console.log(response);
     } catch (errors) {
     console.error(errors);
