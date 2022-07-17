@@ -56,15 +56,18 @@ public class JpaPage {
     @JsonIgnoreProperties("elements")
     private JpaUnit unit;
 
+    private Integer position;
+
     public JpaPage(Long id) {
         this.id = id;
     }
 
-    public JpaPage(Long id, String name, JpaPageType type, List<JpaElement> jpaElements) {
+    public JpaPage(Long id, String name, JpaPageType type, List<JpaElement> jpaElements, Integer position) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.elements = jpaElements;
+        this.position = position;
     }
 
     public Page mapToDomain() {
@@ -74,7 +77,7 @@ public class JpaPage {
             elements.add(element);
         }
         Page page = new Page(this.getId(), this.getName(), elements, this.getUnit().mapToDomainReduced(),
-                this.getType().toString());
+                this.getType().toString(), this.position);
         return page;
     }
 

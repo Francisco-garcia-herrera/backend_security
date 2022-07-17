@@ -33,6 +33,8 @@ public class Page {
 
     private String type;
 
+    private Integer position;
+
     public PageHttpRestEntity mapToDto() {
         return PageHttpRestEntity.builder()
                 .id(this.getId())
@@ -42,6 +44,7 @@ public class Page {
                         : null)
                 .unit(this.getUnit().mapToDtoReduced())
                 .type(this.type)
+                .position(this.position)
                 .build();
     }
 
@@ -51,6 +54,7 @@ public class Page {
                 .name(this.getName() != null ? this.getName() : null)
                 .unit(this.getUnit() != null ? this.getUnit().mapToDtoReduced() : null)
                 .type(this.type)
+                .position(this.position)
                 .build();
     }
 
@@ -63,7 +67,7 @@ public class Page {
             }
         }
         JpaPage jpaPage = new JpaPage(this.getId(), this.getName() != null ? this.getName() : null,
-                this.getType() != null ? JpaPageType.valueOf(this.getType()) : null, jpaElements);
+                this.getType() != null ? JpaPageType.valueOf(this.getType()) : null, jpaElements, this.position);
         return jpaPage;
     }
 

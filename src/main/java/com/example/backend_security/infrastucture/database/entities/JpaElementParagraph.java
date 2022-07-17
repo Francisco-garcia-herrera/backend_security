@@ -10,7 +10,6 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.example.backend_security.domain.entities.Element;
-import com.example.backend_security.domain.entities.ElementImage;
 import com.example.backend_security.domain.entities.ElementParagraph;
 import com.example.backend_security.domain.entities.Page;
 

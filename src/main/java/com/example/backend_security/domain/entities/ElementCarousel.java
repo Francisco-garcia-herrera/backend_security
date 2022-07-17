@@ -73,6 +73,7 @@ public class ElementCarousel extends Element {
             for (ElementCarouselData elementCarouselData : this.elementCarouselDatas) {
                 ElementCarouselDataHttpRestEntity elementCarouselDataHttpRestEntity = new ElementCarouselDataHttpRestEntity(
                         elementCarouselData.getId(), elementCarouselData.getType(), elementCarouselData.getTitle(),
+                        elementCarouselData.getPosition(),
                         elementCarouselData.getElementCarousel()
                                 .mapToElementCarrouselDto());
                 elementCarouselDatas.add(elementCarouselDataHttpRestEntity);
@@ -91,6 +92,7 @@ public class ElementCarousel extends Element {
             for (ElementCarouselData elementCarouselData : this.getElementCarouselDatas()) {
                 JpaElementCarouselData jpaElementCarouselData = new JpaElementCarouselData(elementCarouselData.getId(),
                         elementCarouselData.getType(), elementCarouselData.getTitle(),
+                        elementCarouselData.getPosition(),
                         elementCarouselData.getElementCarousel()
                                 .mapToJpaElementCarrousel());
                 jpaElementCarouselDatas.add(jpaElementCarouselData);

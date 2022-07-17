@@ -18,11 +18,12 @@ public class ElementCarouselDataHttpRestEntity {
     private Long id;
     private String type;
     private String title;
+    private Integer position;
     private ElementCarouselHttpRestEntity elementCarousel;
 
     public ElementCarouselData mapToDomain() {
         ElementCarouselData elementCarouselData = new ElementCarouselData(this.getId(),
-                this.getType(), this.getTitle(), this.getElementCarousel().mapToDomainReduced());
+                this.getType(), this.getTitle(), this.getPosition(), this.getElementCarousel().mapToDomainReduced());
         return elementCarouselData;
     }
 

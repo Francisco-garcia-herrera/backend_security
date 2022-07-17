@@ -71,6 +71,7 @@ public class JpaToDomainAdapter {
                 .elements(convert(object.getElements()))
                 .unit(object.getUnit().mapToDomainReduced())
                 .type(object.getType().toString())
+                .position(object.getPosition())
                 .build();
     }
 
@@ -80,6 +81,7 @@ public class JpaToDomainAdapter {
                 .id(object.getId())
                 .name(object.getName())
                 .type(object.getType().toString())
+                .position(object.getPosition())
                 .build();
     }
 
@@ -101,6 +103,7 @@ public class JpaToDomainAdapter {
                 .id(object.getId())
                 .type(object.getType())
                 .title(object.getTitle())
+                .position(object.getPosition())
                 .elementCarousel(object.getElementCarousel().mapToElementCarrousel())
                 .build();
     }
@@ -117,6 +120,7 @@ public class JpaToDomainAdapter {
                 .id(object.getId())
                 .name(object.getName())
                 .pages(convertPagesReduced(object.getPages()))
+                .position(object.getPosition())
                 .build();
     }
 

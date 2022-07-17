@@ -1,7 +1,6 @@
 package com.example.backend_security.infrastucture.http.httprestentities;
 
 import com.example.backend_security.domain.entities.Element;
-import com.example.backend_security.domain.entities.ElementImage;
 import com.example.backend_security.domain.entities.ElementParagraph;
 
 import lombok.AllArgsConstructor;

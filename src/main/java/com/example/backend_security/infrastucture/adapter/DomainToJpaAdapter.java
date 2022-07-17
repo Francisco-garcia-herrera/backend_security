@@ -37,13 +37,13 @@ public class DomainToJpaAdapter {
 
         JpaPage jpaPage = new JpaPage(object.getId(), object.getName(), JpaPageType.valueOf(object.getType()),
                 jpaElements,
-                object.getUnit().mapToJpa());
+                object.getUnit().mapToJpa(), object.getPosition());
         return jpaPage;
     }
 
     public JpaElementCarouselData convert(ElementCarouselData object) {
         JpaElementCarouselData jpaElementCarouselData = new JpaElementCarouselData(object.getId(), object.getType(),
-                object.getTitle(), object.getElementCarousel().mapToJpaElementCarrousel());
+                object.getTitle(), object.getPosition(), object.getElementCarousel().mapToJpaElementCarrousel());
         return jpaElementCarouselData;
     }
 
@@ -56,6 +56,7 @@ public class DomainToJpaAdapter {
                 JpaPage jpaPage = new JpaPage();
                 jpaPage.setId(page.getId());
                 jpaPage.setName(page.getName());
+                jpaPage.setPosition(page.getPosition());
 
                 JpaUnit jpaUnit = new JpaUnit();
                 jpaUnit.setId(unit.getId());
@@ -72,7 +73,7 @@ public class DomainToJpaAdapter {
             }
         }
 
-        JpaUnit jpaUnit = new JpaUnit(unit.getId(), unit.getName(), jpaPages);
+        JpaUnit jpaUnit = new JpaUnit(unit.getId(), unit.getName(), jpaPages, unit.getPosition());
         return jpaUnit;
     }
 }

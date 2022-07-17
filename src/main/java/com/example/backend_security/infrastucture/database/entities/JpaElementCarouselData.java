@@ -40,6 +40,8 @@ public class JpaElementCarouselData {
 
     private String title;
 
+    private Integer position;
+
     /* @ManyToOne(cascade = { CascadeType.ALL }) */
     @ManyToOne(cascade = { CascadeType.MERGE })
     @JoinColumn(name = "element_id")
@@ -47,7 +49,7 @@ public class JpaElementCarouselData {
 
     public ElementCarouselData mapToDomain() {
         ElementCarouselData elementCarouselData = new ElementCarouselData(this.getId(),
-                this.getType(), this.getTitle(),
+                this.getType(), this.getTitle(), this.getPosition(),
                 this.getElementCarousel().mapToElementCarrousel());
         return elementCarouselData;
     }

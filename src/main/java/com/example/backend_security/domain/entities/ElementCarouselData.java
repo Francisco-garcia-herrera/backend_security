@@ -17,11 +17,12 @@ public class ElementCarouselData {
     private Long id;
     private String type;
     private String title;
+    private Integer position;
     private ElementCarousel elementCarousel;
 
     public ElementCarouselDataHttpRestEntity mapToDto() {
         ElementCarouselDataHttpRestEntity elementCarouselData = new ElementCarouselDataHttpRestEntity(this.getId(),
-                this.getType(), this.getTitle(),
+                this.getType(), this.getTitle(), this.getPosition(),
                 this.getElementCarousel().mapToElementCarrouselDto());
         return elementCarouselData;
     }

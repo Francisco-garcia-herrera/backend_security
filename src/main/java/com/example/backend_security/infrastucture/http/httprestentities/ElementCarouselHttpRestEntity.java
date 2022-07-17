@@ -61,7 +61,7 @@ public class ElementCarouselHttpRestEntity extends ElementHttpRestEntity {
 
                 ElementCarouselData elementCarouselData = new ElementCarouselData(
                         elementCarouselDataHttpRestEntity.getId(), elementCarouselDataHttpRestEntity.getType(),
-                        elementCarouselDataHttpRestEntity.getTitle(),
+                        elementCarouselDataHttpRestEntity.getTitle(), elementCarouselDataHttpRestEntity.getPosition(),
                         elementCarousel);
                 elementCarouselDatas.add(elementCarouselData);
             }

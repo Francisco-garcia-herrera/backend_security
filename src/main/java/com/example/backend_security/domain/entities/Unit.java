@@ -28,6 +28,8 @@ public class Unit {
 
     private List<Page> pages;
 
+    private Integer position;
+
     public UnitHttpRestEntity mapToDto() {
         return UnitHttpRestEntity.builder()
                 .id(this.getId())
@@ -35,6 +37,7 @@ public class Unit {
                 .pages(this.getPages() != null
                         ? this.getPages().stream().map(DomainToDtoAdapter::convert).collect(Collectors.toList())
                         : null)
+                .position(this.getPosition())
                 .build();
     }
 
@@ -52,7 +55,7 @@ public class Unit {
                 jpaPages.add(jpaPage);
             }
         }
-        JpaUnit jpaUnit = new JpaUnit(this.getId(), this.getName(), jpaPages);
+        JpaUnit jpaUnit = new JpaUnit(this.getId(), this.getName(), jpaPages, this.getPosition());
         return jpaUnit;
     }
 

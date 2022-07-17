@@ -81,6 +81,7 @@ public class JpaElementCarousel extends JpaElement {
 
                 ElementCarouselData elementCarouselData = new ElementCarouselData(jpaElementCarouselData.getId(),
                         jpaElementCarouselData.getType(), jpaElementCarouselData.getTitle(),
+                        jpaElementCarouselData.getPosition(),
                         elementCarousel);
                 elementCarouselDatas.add(elementCarouselData);
             }

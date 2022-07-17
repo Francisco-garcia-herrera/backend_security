@@ -11,13 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend_security.domain.entities.Element;
-import com.example.backend_security.domain.usecases.elements.image.CreateElementImage;
-import com.example.backend_security.domain.usecases.elements.image.UpdateElementImage;
 import com.example.backend_security.domain.usecases.elements.paragraph.CreateElementParagraph;
 import com.example.backend_security.domain.usecases.elements.paragraph.UpdateElementParagraph;
 import com.example.backend_security.infrastucture.adapter.DomainToDtoAdapter;
 import com.example.backend_security.infrastucture.http.httprestentities.ElementHttpRestEntity;
-import com.example.backend_security.infrastucture.http.httprestentities.ElementImageHttpRestEntity;
 import com.example.backend_security.infrastucture.http.httprestentities.ElementParagraphHttpRestEntity;
 
 import org.springframework.http.HttpStatus;

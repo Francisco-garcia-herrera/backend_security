@@ -43,6 +43,8 @@ public class JpaUnit {
     @JsonIgnoreProperties("unit")
     private List<JpaPage> pages;
 
+    private Integer position;
+
     public Unit mapToDomain() {
         List<Page> pages = new ArrayList<>();
         if (this.getPages() != null) {
@@ -51,7 +53,7 @@ public class JpaUnit {
             }
         }
 
-        Unit unit = new Unit(this.getId(), this.getName(), pages);
+        Unit unit = new Unit(this.getId(), this.getName(), pages, this.getPosition());
         return unit;
     }
 
