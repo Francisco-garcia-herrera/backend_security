@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend_security.domain.entities.Unit;
+import com.example.backend_security.domain.helpers.PDFHelper;
 import com.example.backend_security.domain.usecases.unit.CreateUnit;
 import com.example.backend_security.domain.usecases.unit.DeleteUnit;
 import com.example.backend_security.domain.usecases.unit.GetAllUnits;
@@ -155,6 +156,13 @@ public class UnitController {
         IOUtils.closeQuietly(byteArrayOutputStream);
 
         return byteArrayOutputStream.toByteArray();
+    }
+
+    @GetMapping("/get-pdf")
+    public void getPdf() throws IOException {
+        String html = "<h1>hello</h1>";
+        String xhtml = PDFHelper.htmlToXhtml(html);
+        PDFHelper.xhtmlToPdf(xhtml, "src/main/resources/template/output.pdf");
     }
 
 }
