@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.backend_security.domain.entities.Element;
 import com.example.backend_security.domain.entities.ElementImage;
 import com.example.backend_security.domain.entities.ElementVideo;
+import com.example.backend_security.domain.entities.Page;
 import com.example.backend_security.infrastucture.adapter.JpaToDomainAdapter;
 import com.example.backend_security.infrastucture.database.entities.JpaElement;
 import com.example.backend_security.infrastucture.database.entities.JpaElementImage;
@@ -39,9 +40,13 @@ public class HelloController {
         System.out.println(auth.getAuthorities());
         System.out.println(auth.isAuthenticated());
 
+        Page page = new Page();
+        page.setId(1L);
+
         List<String> elements = new ArrayList<>();
-        Element element = new ElementImage(1, "IMAGE", "URL IMAGE");
-        Element element2 = new ElementVideo(1, "VIDEO", "H264");
+        Element element = new ElementImage(1, page, "IMAGE",
+                "https://images.ctfassets.net/13kgbbetzzq0/1CqTDINhWcCwImUOc4gSiE/3d24fa393e0774a539848bf92da255cb/raster-vs-vector.png");
+        Element element2 = new ElementVideo(1, page, "VIDEO", "H264");
         elements.add(element.render());
         elements.add(element2.render());
 

@@ -42,6 +42,7 @@ async function getAllPagesByUnitId(unitId){
     htmlResponse += "</ul>";
     document.getElementById("pagesList").innerHTML = htmlResponse;
     resetElementList();
+    resetRenderList();
     return response.data;
     } catch (errors) {
     console.error(errors);
@@ -53,7 +54,6 @@ async function getPage(id){
     let htmlResponse = "";
     try {
     const response = await axios.get(`${BASE_URL}/pages/`+id);
-    console.log(response.data);
     htmlResponse += "name: "+response.data.name;
     htmlResponse += "<ul class='list-group'>";
     /* response.data.elements.sort(function(a, b){return a.position - b.position}); */
@@ -73,6 +73,8 @@ async function getPage(id){
     });
     htmlResponse += "</ul>";
     document.getElementById("pageInfo").innerHTML = htmlResponse;
+    resetRenderList();
+    await renderAllElementsByPageId(pageSelected);
     return response.data;
     } catch (errors) {
     console.error(errors);
@@ -205,6 +207,7 @@ async function getAllUnits(){
     });
     htmlResponse += "</ul>";
     document.getElementById("unitList").innerHTML = htmlResponse;
+    resetRenderList();
     return response.data;
     } catch (errors) {
     console.error(errors);
@@ -237,4 +240,23 @@ async function deleteUnit(id){
     resetPageList();
     resetElementList();
     getAllUnits();
+}
+
+async function renderAllElementsByPageId(pageSelected){
+    let htmlResponse = "";
+    try {
+    const response = await axios.get(`${BASE_URL}/elements/render-all-by-page/`+ pageSelected);
+    response.data.forEach(htmltext => {
+        htmlResponse += htmltext;
+    });
+    document.getElementById("renderList").innerHTML = htmlResponse;
+    return response.data;
+    } catch (errors) {
+    console.error(errors);
+    }
+}
+
+
+function resetRenderList(){
+    document.getElementById("renderList").innerHTML = "";
 }

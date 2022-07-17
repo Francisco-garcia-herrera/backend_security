@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.backend_security.domain.entities.Element;
 import com.example.backend_security.domain.usecases.elements.GetAllElements;
 import com.example.backend_security.domain.usecases.elements.GetElement;
+import com.example.backend_security.domain.usecases.elements.RenderAllElementsByPage;
 import com.example.backend_security.domain.usecases.elements.DeleteElement;
 import com.example.backend_security.infrastucture.adapter.DomainToDtoAdapter;
 import com.example.backend_security.infrastucture.database.entities.JpaElement;
@@ -34,13 +35,17 @@ public class ElementController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private GetAllElements getAllElements;
+    GetAllElements getAllElements;
+
     @Autowired
-    private GetElement getElement;
+    RenderAllElementsByPage renderAllElementsByPage;
+
     @Autowired
-    private DeleteElement deleteElement;
+    GetElement getElement;
     @Autowired
-    private JpaElementQueries jpaElementQueries;
+    DeleteElement deleteElement;
+    @Autowired
+    JpaElementQueries jpaElementQueries;
 
     @GetMapping("/get-all")
     public ResponseEntity<?> getAll() {
@@ -53,6 +58,18 @@ public class ElementController {
         body = DomainToDtoAdapter.convert(elementsDomain);
 
         toReturn = new ResponseEntity<>(body, status);
+        return toReturn;
+    }
+
+    @GetMapping("/render-all-by-page/{id}")
+    public ResponseEntity<?> renderByPageAll(@PathVariable Long id) {
+        HttpStatus status = HttpStatus.OK;
+        ResponseEntity<?> toReturn;
+        List<String> elementRenders = new ArrayList<>();
+
+        elementRenders = renderAllElementsByPage.get(id);
+
+        toReturn = new ResponseEntity<>(elementRenders, status);
         return toReturn;
     }
 

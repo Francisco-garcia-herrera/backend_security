@@ -22,8 +22,8 @@ public class ElementVideo extends Element {
 
     private String codec;
 
-    public ElementVideo(Integer position, String type, String codec) {
-        super(position);
+    public ElementVideo(Integer position, Page page, String type, String codec) {
+        super(position, page);
         this.type = type;
         this.codec = codec;
     }
@@ -35,7 +35,7 @@ public class ElementVideo extends Element {
     }
 
     public String render() {
-        return "Elemento Video: " + this.getPosition() + ". Codec: " + this.codec;
+        return "<div>" + this.codec + "</div>";
     }
 
     public ElementHttpRestEntity mapToDto() {

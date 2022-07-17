@@ -39,6 +39,18 @@ public class JpaElementRepository implements ElementRepository {
     }
 
     @Override
+    public List<Element> renderAllByPage(Long pageId) {
+        List<JpaElement> jpaElements = new ArrayList<>();
+        try {
+            jpaElements = jpaElementQueries.findByPageId(pageId);
+        } catch (Exception e) {
+            /* throw new Exception(); */
+            System.out.println("Exception RenderAllByPage JpaElementRepository " + e);
+        }
+        return jpaToDomainAdapter.convert(jpaElements);
+    }
+
+    @Override
     public Element getElementById(Long elementId) {
         Optional<JpaElement> jpaElement = null;
         try {

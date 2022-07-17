@@ -27,9 +27,9 @@ public class ElementCarousel extends Element {
     private String title;
     private List<ElementCarouselData> elementCarouselDatas;
 
-    public ElementCarousel(Integer position, String type, String title,
+    public ElementCarousel(Integer position, Page page, String type, String title,
             List<ElementCarouselData> elementCarouselDatas) {
-        super(position);
+        super(position, page);
         this.type = type;
         this.title = title;
         this.elementCarouselDatas = elementCarouselDatas;
@@ -44,7 +44,7 @@ public class ElementCarousel extends Element {
     }
 
     public String render() {
-        return "Elemento Carousel: " + this.getPosition() + ". Title: " + this.title;
+        return "<div id='carouselExampleSlidesOnly' class='carousel slide' data-bs-ride='carousel'><div class='carousel-inner'><div class='carousel-item active'><span>1</span></div><div class='carousel-item'><span>2</span></div></div></div>";
     }
 
     public ElementHttpRestEntity mapToDto() {

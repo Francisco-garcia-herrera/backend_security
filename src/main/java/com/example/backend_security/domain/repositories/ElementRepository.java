@@ -8,6 +8,8 @@ public interface ElementRepository {
 
     List<Element> getAll();
 
+    List<Element> renderAllByPage(Long pageId);
+
     Element getElementById(Long elementId);
 
     Element save(Element element);

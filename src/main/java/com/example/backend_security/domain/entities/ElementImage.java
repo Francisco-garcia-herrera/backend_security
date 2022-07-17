@@ -21,8 +21,8 @@ public class ElementImage extends Element {
     private String type;
     private String url;
 
-    public ElementImage(Integer position, String type, String url) {
-        super(position);
+    public ElementImage(Integer position, Page page, String type, String url) {
+        super(position, page);
         this.type = type;
         this.url = url;
     }
@@ -34,7 +34,7 @@ public class ElementImage extends Element {
     }
 
     public String render() {
-        return "Elemento Imagen: " + this.getPosition() + ". Url: " + this.url;
+        return "<div class='d-flex justify-content-center'><img src='" + this.url + "' /></div>";
     }
 
     public ElementHttpRestEntity mapToDto() {
